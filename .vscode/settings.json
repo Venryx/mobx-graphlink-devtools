@@ -1,5 +1,8 @@
 {
 	"typescript.tsdk": "node_modules\\typescript\\lib",
-	"typescript.preferences.importModuleSpecifierEnding": "js",
-	"javascript.preferences.importModuleSpecifierEnding": "js",
+	/*"typescript.preferences.importModuleSpecifierEnding": "js",
+	"javascript.preferences.importModuleSpecifierEnding": "js",*/
+	// needed atm, for webpack's resolver (for .tsx files)
+	"typescript.preferences.importModuleSpecifierEnding": "minimal",
+	"javascript.preferences.importModuleSpecifierEnding": "minimal",
 }
