@@ -49828,22 +49828,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AccessorsUI": () => (/* binding */ AccessorsUI)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var react_vcomponents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(30);
-/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
+/* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var react_vcomponents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(30);
+/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18);
 
 
 
-class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_2__.BaseComponent {
+
+class AccessorMeta {
+    constructor() {
+        Object.defineProperty(this, "name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_3__.BaseComponent {
     render() {
         let {} = this.props;
-        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, { style: { flex: 33 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, null, "Accessors")),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, { style: { flex: 33 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, null, "Call plans")),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, { style: { flex: 34 } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, null, "Call plan"))));
+        let [accessorMetas, setAccessorMetas] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+        return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, null,
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Column, { style: { flex: 33 } },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Text, null, "Accessors"),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Button, { text: "Refresh", onClick: () => {
+                            chrome.devtools.inspectedWindow.eval("globalThis.mglDevTools_hook.GetAccessorMetadatas()", (result, exceptionInfo) => {
+                                (0,js_vextensions__WEBPACK_IMPORTED_MODULE_0__.Assert)(Array.isArray(result), `Got invalid result:${result}`);
+                                /*if (result.length) {
+                                    Assert(typeof result[0] == "string", `Invalid entry:${JSON.stringify(result[0])}`);
+                                }*/
+                                setAccessorMetas(result);
+                            });
+                        } })),
+                accessorMetas.map((meta, index) => {
+                    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, { key: index }, meta.name));
+                })),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Column, { style: { flex: 33 } },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Text, null, "Call plans"),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Button, { text: "Refresh", onClick: () => {
+                        } }))),
+            react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Column, { style: { flex: 34 } },
+                react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Text, null, "Call plan"),
+                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Button, { text: "Refresh", onClick: () => {
+                        } })))));
     }
 }
 
@@ -49867,12 +49899,40 @@ class ExtrasUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_2__.BaseCompon
     render() {
         let {} = this.props;
         let [text, setText] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+        let [lastResult, setLastResult] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, { style: { height: "100%" } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, { style: { width: 500 } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Code:"),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.TextArea, { style: { flex: 1, border: "1px solid black" }, value: text, onChange: val => setText(val) }),
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Button, { text: "Run", onClick: () => {
-                        eval(text);
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Run using:"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Button, { text: "eval", onClick: () => {
+                            const result = eval(text);
+                            console.log("Result:", result);
+                            setLastResult(result);
+                        } }),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Button, { text: "inspectedWindow.eval", onClick: () => {
+                            chrome.devtools.inspectedWindow.eval(text, (result, exceptionInfo) => {
+                                console.log("Result:", result, "@exceptionInfo:", exceptionInfo);
+                                if (exceptionInfo != null) {
+                                    setLastResult({ exceptionInfo });
+                                    return;
+                                }
+                                setLastResult(result);
+                            });
+                        } }))),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, { style: { flex: 1 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Result:"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.TextArea, { style: { height: "100%", tabSize: 4 }, value: JSON.stringify(lastResult, null, "\t") })),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, { style: { width: 300 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Button, { text: "Test1", onClick: () => {
+                        chrome.devtools.inspectedWindow.eval("5 * 30", (result, isException) => {
+                            console.log("Result:", result);
+                        });
+                    } }),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Button, { text: "Test2", onClick: () => {
+                    } }),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Button, { text: "Test3", onClick: () => {
                     } }))));
     }
 }
