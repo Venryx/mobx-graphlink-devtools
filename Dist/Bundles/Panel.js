@@ -49931,9 +49931,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//document.onload = ()=>{
 window.addEventListener("load", () => {
-    //document.body.append("Test123");
     const rootEl = document.getElementById("root");
     react_dom__WEBPACK_IMPORTED_MODULE_2__.render(react__WEBPACK_IMPORTED_MODULE_1__.createElement(_UI_Root__WEBPACK_IMPORTED_MODULE_3__.RootUI), rootEl);
 });
