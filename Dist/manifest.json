@@ -4,5 +4,5 @@
 	"description": "Developer tools for mobx and mobx-graphlink (if present), enabling: profiling, dependency-tree viewing, etc.",
 	"version": "0.0.1",
 	"author": "Venryx",
-	"devtools_page": "devtools.html"
+	"devtools_page": "Root.html"
 }

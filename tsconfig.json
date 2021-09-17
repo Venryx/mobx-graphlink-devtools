@@ -1,0 +1,45 @@
+{
+	"compilerOptions": {
+		// general
+		"sourceMap": true,
+		"watch": true,
+		"moduleResolution": "node",
+
+		// compilation
+		//"target": "es2015",
+		//"target": "esnext", // babel targets es2015 (ie. transpiles our code to it), so it's fine for TS to target es-next
+		"target": "ES2018", // need es2018 for ts-loader (it doesn't understand esnext)
+		/*"lib": [
+			"es5",
+			"es6",
+			"ESNext",
+			"dom"
+		],*/
+		"jsx": "react",
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"useDefineForClassFields": true, // needed for mobx @observable
+		// strictness settings
+		//"strict": true, // enables all of the below (other than noImplicitReturns)
+		//"noImplicitAny": true,
+		"noImplicitAny": false,
+		//"noImplicitThis": true,
+		//"noImplicitReturns": true,
+		"alwaysStrict": true,
+		//"strictBindCallApply": true,
+		"strictNullChecks": true,
+		//"strictFunctionTypes": true,
+		//"strictPropertyInitialization": true,
+
+		// modules/paths
+		"rootDir": "Source",
+		"baseUrl": "Source", // keep commented; this way, we remember to always use relative paths (needed for in-node-modules typescript type-resolving)
+		"outDir": "Dist"
+	},
+	"include": [
+		"./Source/**/*.ts",
+		"./Source/**/*.tsx"
+	],
+	"compileOnSave": true
+}
