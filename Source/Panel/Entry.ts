@@ -1,4 +1,4 @@
 //document.onload = ()=>{
 window.addEventListener("load", ()=>{
-	document.body.append("Test1");
+	document.body.append("Test123");
 });

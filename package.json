@@ -20,12 +20,14 @@
 		"mobx-graphlink"
 	],
 	"scripts": {
-		"dev": "tsc --watch",
-		"dist": "tsc"
+		"dev": "webpack --config webpack.config.js --progress --watch"
 	},
 	"devDependencies": {
 		"@types/react": "^17.0.9",
-		"typescript": "^4.3.2"
+		"ts-loader": "^9.2.5",
+		"typescript": "^4.3.2",
+		"webpack": "^5.53.0",
+		"webpack-cli": "^4.8.0"
 	},
 	"dependencies": {
 		"js-vextensions": "^1.0.66",
