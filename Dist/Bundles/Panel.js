@@ -28885,6 +28885,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_MobX__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(60);
 /* harmony import */ var _Shared_FromWVC__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(105);
 /* harmony import */ var _Accessors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(106);
+/* harmony import */ var _Extras__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(107);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -28897,15 +28898,21 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-const tabs = ["Accessors"];
+
+const tabs = ["Accessors", "Extras"];
 let RootUI = class RootUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_1__.BaseComponent {
     render() {
         let {} = this.props;
         let [tab, setTab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("Accessors");
-        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Column, null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, { style: { padding: 5, background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_4__.HSLA)(0, 0, 0, .5) } },
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Column, { style: {
+                height: "100%",
+                //background: "black",
+            } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, { style: { height: 36, padding: 5, background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_4__.HSLA)(0, 0, 0, .5) } },
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Select, { displayType: "button bar", options: tabs, value: tab, onChange: val => setTab(val) })),
-            tab == "Accessors" && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Accessors__WEBPACK_IMPORTED_MODULE_5__.AccessorsUI, null)));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, height: "calc(100% - 36px)" } },
+                tab == "Accessors" && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Accessors__WEBPACK_IMPORTED_MODULE_5__.AccessorsUI, null),
+                tab == "Extras" && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Extras__WEBPACK_IMPORTED_MODULE_6__.ExtrasUI, null))));
     }
 };
 RootUI = __decorate([
@@ -37523,11 +37530,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ClassHooks": () => (/* binding */ ClassHooks),
 /* harmony export */   "GetMagicStackSymbol": () => (/* binding */ GetMagicStackSymbol)
 /* harmony export */ });
-/* harmony import */ var react_universal_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(104);
+/* harmony import */ var react_universal_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
-/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(84);
-/* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(61);
+/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85);
+/* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(62);
 
 
 
@@ -37622,6 +37629,597 @@ function GetMagicStackSymbol(comp) {
 
 /***/ }),
 /* 61 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "supportReactDevTools": () => (/* binding */ supportReactDevTools)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+var isProduction = process.env.NODE_ENV === 'production';
+var prefix = 'Invariant failed';
+function invariant(condition, message) {
+    if (condition) {
+        return;
+    }
+    if (isProduction) {
+        throw new Error(prefix);
+    }
+    throw new Error(prefix + ": " + (message || ''));
+}
+
+react__WEBPACK_IMPORTED_MODULE_0__.PureComponent.prototype.componentDidMount = function () {};
+
+react__WEBPACK_IMPORTED_MODULE_0__.Component.prototype.componentDidMount = function () {};
+
+invariant(typeof Symbol === 'function' && Symbol["for"], 'react-class-hooks needs Symbols!'); // Separate objects for better debugging.
+
+var MAGIC_STATES = Symbol["for"]('magicStates');
+var MAGIC_EFFECTS = Symbol["for"]('magicEffects');
+var MAGIC_MEMOS = Symbol["for"]('magicMemos');
+var MAGIC_REFS = Symbol["for"]('magicRefs');
+var MAGIC_STACKS = Symbol["for"]('magicStacks');
+var ReactInternals = react__WEBPACK_IMPORTED_MODULE_0__.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+var isReact15 = react__WEBPACK_IMPORTED_MODULE_0__.version.indexOf('15') === 0; // React 15.3.2 support + Polyfill
+
+var instanceKey = isReact15 ? '_instance' : 'stateNode';
+
+if (isReact15) {
+  invariant(ReactInternals, 'Please for React ^15.3.2 - 15.6.2 import "react-class-hooks/poly15" in your root index.js!');
+}
+
+function getMagicSelf() {
+  invariant(ReactInternals.ReactCurrentOwner.current, 'You are using Hooks outside of "render" React.Component Method!');
+  return ReactInternals.ReactCurrentOwner.current[instanceKey];
+}
+var getMagicDispatcher = function getMagicDispatcher() {
+  return ReactInternals.ReactCurrentDispatcher.current;
+};
+function checkSymbol(name, keySymbol) {
+  invariant(_typeof(keySymbol) === 'symbol', "".concat(name, " - Expected a Symbol for key!"));
+}
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+function MagicStack(StackName) {
+  var _this = this;
+
+  this.name = StackName;
+  this.symbol = Symbol("".concat(this.name, ".Stack")); // this.cleanSymbol = Symbol(`${this.name}.Stack.Cleaner`);
+
+  this.keys = [];
+
+  this.getKey = function (stackIndex) {
+    var len = _this.keys.length; // create if not exist
+
+    if (stackIndex > len) {
+      for (var i = len; i < stackIndex; i += 1) {
+        _this.keys.push(Symbol("".concat(_this.name, "-").concat(i)));
+      }
+    }
+
+    return _this.keys[stackIndex - 1];
+  };
+}
+function useMagicStack(magicStack, hook) {
+  // inject next renders stack counter cleaner
+  var self = getMagicSelf();
+
+  if (!self[MAGIC_STACKS]) {
+    self[MAGIC_STACKS] = {};
+    var renderFunc = self.render.bind(self);
+
+    self.render = function () {
+      Object.getOwnPropertySymbols(self[MAGIC_STACKS]).forEach(function (k) {
+        self[MAGIC_STACKS][k] = 0;
+      });
+      return renderFunc.apply(void 0, arguments);
+    };
+  } // stack counter init
+
+
+  if (!self[MAGIC_STACKS][magicStack.symbol]) {
+    self[MAGIC_STACKS][magicStack.symbol] = 0;
+  } // stack counter update
+
+
+  self[MAGIC_STACKS][magicStack.symbol] += 1;
+
+  for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    args[_key - 2] = arguments[_key];
+  }
+
+  return hook.apply(void 0, [magicStack.getKey(self[MAGIC_STACKS][magicStack.symbol])].concat(args));
+}
+
+function createHook(stackName, hook) {
+  var stack = new MagicStack(stackName);
+  return function () {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    if (args && args.length && _typeof(args[0]) === 'symbol') return hook.apply(void 0, args);
+    return useMagicStack.apply(void 0, [stack, hook].concat(args));
+  };
+}
+function createNamedHook(name, hook) {
+  var keySymbol = Symbol(name);
+  return hook.bind(null, keySymbol);
+}
+
+var devToolConfig = {
+  active: false,
+  stateKey: '__UNIVERSAL_HOOKS__',
+  show: 'object' // object, array, map
+
+};
+function supportReactDevTools(_ref) {
+  var active = _ref.active,
+      stateKey = _ref.stateKey,
+      show = _ref.show;
+  if (stateKey) devToolConfig.stateKey = stateKey;
+  if (show) devToolConfig.show = show;
+  devToolConfig.active = !!active;
+}
+function setDevToolsHookState(name, state) {
+  if (devToolConfig.active) {
+    var self = getMagicSelf();
+    var stateKey = devToolConfig.stateKey,
+        show = devToolConfig.show;
+    if (!self.state) self.state = {};
+    if (!self.state[stateKey]) self.state[stateKey] = show === 'map' ? new Map() : show === 'array' ? [] : {};
+
+    if (show === 'map') {
+      self.state[stateKey].set(name, state);
+    } else if (show === 'array') {
+      var hookState = self.state[stateKey].find(function (h) {
+        return h.hasOwnProperty(name);
+      });
+
+      if (hookState) {
+        hookState[name] = state;
+      } else {
+        self.state[stateKey].push(_defineProperty({}, name, state));
+      }
+    } else {
+      var hookNames = Object.keys(self.state[stateKey]);
+      var hookName = hookNames.find(function (s) {
+        return s.split(':')[1] === name;
+      });
+      self.state[stateKey][hookName || "".concat(hookNames.length.toString().padStart(2, '0'), ":").concat(name)] = state;
+    }
+  }
+}
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+function useClassStateKey(keySymbol, initialValue) {
+  checkSymbol('useClassStateKey', keySymbol);
+  var self = getMagicSelf(); // first time Render && first Hook
+
+  if (!self[MAGIC_STATES]) self[MAGIC_STATES] = {}; // first time Render -> assign initial Value and create Setter
+
+  if (!self[MAGIC_STATES].hasOwnProperty(keySymbol)) {
+    self[MAGIC_STATES][keySymbol] = {
+      value: typeof initialValue === 'function' ? initialValue() : initialValue,
+      setValue: function setValue(value, callback) {
+        var newState = typeof value === 'function' ? value(self[MAGIC_STATES][keySymbol].value) : value;
+
+        if (self[MAGIC_STATES][keySymbol].value !== newState) {
+          self[MAGIC_STATES][keySymbol].value = newState;
+
+          if (self.updater.isMounted(self)) {
+            self.updater.enqueueForceUpdate(self, callback);
+          }
+        }
+      }
+    };
+  }
+
+  var _self$MAGIC_STATES$ke = self[MAGIC_STATES][keySymbol],
+      value = _self$MAGIC_STATES$ke.value,
+      setValue = _self$MAGIC_STATES$ke.setValue;
+  setDevToolsHookState(keySymbol.description, value);
+  return [value, setValue];
+}
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+var useClassState = createHook('States', useClassStateKey);
+
+useClassState.create = function (name) {
+  return createNamedHook(name, useClassStateKey);
+};
+
+useClassState.createStack = function (stackName) {
+  return createHook(stackName, useClassStateKey);
+};
+
+function inputsArrayEqual(inputs, prevInputs) {
+  invariant(inputs.length === prevInputs.length, 'Hooks inputs array length should be constant between renders!'); // Object.is polyfill
+
+  for (var i = 0; i < inputs.length; i += 1) {
+    var val1 = inputs[i];
+    var val2 = prevInputs[i];
+
+    if (!(val1 === val2 && (val1 !== 0 || 1 / val1 === 1 / val2) || val1 !== val1 && val2 !== val2)) {
+      // eslint-disable-line
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+var useClassEffectKey = function useClassEffectKey(keySymbol, creator, inputs) {
+  var onlyDidUpdate = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  checkSymbol('useClassEffect', keySymbol);
+  invariant(typeof creator === 'function', 'Creator should be a function!');
+  invariant(!inputs || Array.isArray(inputs), 'inputs should be an array!');
+  var self = getMagicSelf(); // create MAGIC_EFFECTS if not exists
+
+  if (!self[MAGIC_EFFECTS]) self[MAGIC_EFFECTS] = {}; // First Render -> Assign creator, inputs and inject methods
+  // TODO didCatch
+
+  if (!self[MAGIC_EFFECTS].hasOwnProperty(keySymbol)) {
+    self[MAGIC_EFFECTS][keySymbol] = {
+      creator: creator,
+      inputs: inputs
+    };
+
+    if (!onlyDidUpdate) {
+      // inject componentDidMount
+      var didMount = typeof self.componentDidMount === 'function' ? self.componentDidMount.bind(self) : undefined;
+
+      self.componentDidMount = function () {
+        if (didMount) didMount();
+        self[MAGIC_EFFECTS][keySymbol].cleaner = self[MAGIC_EFFECTS][keySymbol].creator(); // save last executed inputs
+
+        self[MAGIC_EFFECTS][keySymbol].prevInputs = self[MAGIC_EFFECTS][keySymbol].inputs;
+        invariant(!self[MAGIC_EFFECTS][keySymbol].cleaner || typeof self[MAGIC_EFFECTS][keySymbol].cleaner === 'function', 'useClassEffect return (Effect Cleaner) should be Function or Void !');
+      };
+    } // inject componentDidUpdate
+
+
+    var didUpdate = typeof self.componentDidUpdate === 'function' ? self.componentDidUpdate.bind(self) : undefined;
+
+    self.componentDidUpdate = function () {
+      if (didUpdate) didUpdate.apply(void 0, arguments); // execute if no inputs || inputs array has values and values changed
+
+      var execute = !self[MAGIC_EFFECTS][keySymbol].inputs || !inputsArrayEqual(self[MAGIC_EFFECTS][keySymbol].inputs, self[MAGIC_EFFECTS][keySymbol].prevInputs);
+
+      if (execute) {
+        if (typeof self[MAGIC_EFFECTS][keySymbol].cleaner === 'function') self[MAGIC_EFFECTS][keySymbol].cleaner();
+        self[MAGIC_EFFECTS][keySymbol].cleaner = self[MAGIC_EFFECTS][keySymbol].creator(); // save last executed inputs!
+
+        self[MAGIC_EFFECTS][keySymbol].prevInputs = self[MAGIC_EFFECTS][keySymbol].inputs;
+        invariant(!self[MAGIC_EFFECTS][keySymbol].cleaner || typeof self[MAGIC_EFFECTS][keySymbol].cleaner === 'function', 'useClassEffect return (Effect Cleaner) should be Function or Void !');
+      }
+    }; // inject componentWillUnmount
+
+
+    var unmount = typeof self.componentWillUnmount === 'function' ? self.componentWillUnmount.bind(self) : undefined;
+
+    self.componentWillUnmount = function () {
+      if (unmount) unmount();
+      if (typeof self[MAGIC_EFFECTS][keySymbol].cleaner === 'function') self[MAGIC_EFFECTS][keySymbol].cleaner();
+    };
+  } else {
+    // next renders
+    self[MAGIC_EFFECTS][keySymbol].creator = creator;
+    self[MAGIC_EFFECTS][keySymbol].inputs = inputs;
+  }
+};
+
+var useClassEffect = createHook('Effects', useClassEffectKey);
+
+useClassEffect.create = function (name) {
+  return createNamedHook(name, useClassEffectKey);
+};
+
+useClassEffect.createStack = function (stackName) {
+  return createHook(stackName, useClassEffectKey);
+};
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+var useClassMemoKey = function useClassMemoKey(keySymbol, creator, inputs) {
+  checkSymbol('useClassMemo', keySymbol);
+  invariant(typeof creator === 'function', 'Creator should be a function!');
+  invariant(!inputs || Array.isArray(inputs), 'inputs should be an array!');
+  var self = getMagicSelf(); // create magic Memos if not exists
+
+  if (!self[MAGIC_MEMOS]) self[MAGIC_MEMOS] = {}; // First Render -> assign creator, inputs, value
+
+  if (!self[MAGIC_MEMOS].hasOwnProperty(keySymbol)) {
+    self[MAGIC_MEMOS][keySymbol] = {
+      creator: creator,
+      inputs: inputs,
+      value: creator()
+    };
+  } else {
+    // next renders
+    var execute = false;
+
+    if (!inputs) {
+      if (creator !== self[MAGIC_MEMOS][keySymbol].creator) {
+        execute = true;
+      }
+    } else {
+      execute = !inputsArrayEqual(inputs, self[MAGIC_MEMOS][keySymbol].inputs);
+    }
+
+    if (execute) {
+      self[MAGIC_MEMOS][keySymbol] = {
+        creator: creator,
+        inputs: inputs,
+        value: creator()
+      };
+    }
+  }
+
+  var returnValue = self[MAGIC_MEMOS][keySymbol].value;
+  setDevToolsHookState(keySymbol.description, returnValue);
+  return returnValue;
+};
+var useClassMemo = createHook('Memos', useClassMemoKey);
+
+useClassMemo.create = function (name) {
+  return createNamedHook(name, useClassMemoKey);
+};
+
+useClassMemo.createStack = function (stackName) {
+  return createHook(stackName, useClassMemoKey);
+};
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+function useClassCallbackKey(keySymbol, callback, inputs) {
+  return useClassMemoKey(keySymbol, function () {
+    return callback;
+  }, inputs);
+}
+var useClassCallback = createHook('Callbacks', useClassCallbackKey);
+
+useClassCallback.create = function (name) {
+  return createNamedHook(name, useClassCallbackKey);
+};
+
+useClassCallback.createStack = function (stackName) {
+  return createHook(stackName, useClassCallbackKey);
+};
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+var useClassReducerKey = function useClassReducerKey(keySymbol, reducer, initialState) {
+  var stateSetState = useClassStateKey(keySymbol, initialState);
+  var state = stateSetState[0];
+  var setState = stateSetState[1];
+
+  function dispatch(action) {
+    var nextState = reducer(state, action);
+    setState(nextState);
+  }
+
+  return [state, dispatch];
+};
+var useClassReducer = createHook('Reducers', useClassReducerKey);
+
+useClassReducer.create = function (name) {
+  return createNamedHook(name, useClassReducerKey);
+};
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+function useClassRefKey(keySymbol, initialValue) {
+  checkSymbol('useClassRefKey', keySymbol);
+  var self = getMagicSelf(); // first time Render && first Hook
+
+  if (!self[MAGIC_REFS]) self[MAGIC_REFS] = {}; // first time Render -> assign initial Value
+
+  if (!self[MAGIC_REFS].hasOwnProperty(keySymbol)) {
+    var ref = {
+      current: initialValue
+    };
+    Object.seal(ref);
+    self[MAGIC_REFS][keySymbol] = ref;
+  }
+
+  var returnValue = self[MAGIC_REFS][keySymbol];
+  setDevToolsHookState(keySymbol.description, returnValue);
+  return returnValue;
+}
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+var useClassRef = createHook('Refs', useClassRefKey);
+
+useClassRef.create = function (name) {
+  return createNamedHook(name, useClassRefKey);
+};
+
+useClassRef.createStack = function (stackName) {
+  return createHook(stackName, useClassRefKey);
+}; // poly 15 ref
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+function useClassContextKey(keySymbol, context, observedBits) {
+  checkSymbol('useClassContext', keySymbol);
+  getMagicSelf(); // invariant hook outside render method
+
+  invariant(context && context.Provider && context.Consumer, 'Context should be React.createContext object!');
+  var contextValue = getMagicDispatcher().readContext(context, observedBits);
+  setDevToolsHookState(keySymbol.description, contextValue);
+  return contextValue;
+}
+var useClassContext = createHook('Contexts', useClassContextKey);
+
+function useClassImperativeHandle(ref, create, deps) {
+  invariant(typeof create === 'function', "Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: ".concat(create !== null ? _typeof(create) : 'null'));
+  invariant(deps === null || deps === undefined || Array.isArray(deps), 'Hook received a final argument that is not an array!');
+  var effectDeps = deps !== null && deps !== undefined ? deps.concat([ref]) : null; // eslint-disable-next-line consistent-return
+
+  useClassEffect(function () {
+    if (typeof ref === 'function') {
+      var refCallback = ref;
+      refCallback(create()); // eslint-disable-next-line func-names
+
+      return function () {
+        refCallback(null);
+      };
+    }
+
+    if (ref !== null && ref !== undefined) {
+      var refObject = ref;
+      invariant(refObject.hasOwnProperty('current'), "Expected useImperativeHandle() first argument to either be a ref callback or React.createRef() object. Instead received: an object with keys {".concat(Object.keys(refObject).join(', '), "}"));
+      refObject.current = create(); // eslint-disable-next-line func-names
+
+      return function () {
+        refObject.current = null;
+      };
+    }
+  }, effectDeps);
+}
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+function useClassDebugValueKey(keySymbol, value, formatter) {
+  checkSymbol('useDebugValueKey', keySymbol);
+  var viewValue = typeof formatter === 'function' ? formatter(value) : value;
+  setDevToolsHookState(keySymbol.description, viewValue);
+}
+var useClassDebugValue = createHook('DebugValue', useClassDebugValueKey);
+
+/**
+ *  https://github.com/salvoravida/react-class-hooks
+ */
+var useClassLayoutEffect = useClassEffect;
+
+/**
+ *  https://github.com/salvoravida/react-universal-hooks
+ */
+var _useState = react__WEBPACK_IMPORTED_MODULE_0__.useState;
+var _useReducer = react__WEBPACK_IMPORTED_MODULE_0__.useReducer;
+var _useEffect = react__WEBPACK_IMPORTED_MODULE_0__.useEffect;
+var _useLayoutEffect = react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect;
+var _useCallback = react__WEBPACK_IMPORTED_MODULE_0__.useCallback;
+var _useMemo = react__WEBPACK_IMPORTED_MODULE_0__.useMemo;
+var _useRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef;
+var _useContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext;
+var _useImperativeHandle = react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle;
+var _useDebugValue = react__WEBPACK_IMPORTED_MODULE_0__.useDebugValue;
+var ReactInternals$1 = react__WEBPACK_IMPORTED_MODULE_0__.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+
+function isFunctional() {
+  var c = ReactInternals$1.ReactCurrentOwner.current;
+  return !c || !c.stateNode;
+}
+
+function useState() {
+  return isFunctional() ? _useState.apply(void 0, arguments) : useClassState.apply(void 0, arguments);
+}
+
+function useReducer() {
+  return isFunctional() ? _useReducer.apply(void 0, arguments) : useClassReducer.apply(void 0, arguments);
+}
+
+function useEffect() {
+  return isFunctional() ? _useEffect.apply(void 0, arguments) : useClassEffect.apply(void 0, arguments);
+}
+
+function useLayoutEffect() {
+  return isFunctional() ? _useLayoutEffect.apply(void 0, arguments) : useClassLayoutEffect.apply(void 0, arguments);
+}
+
+function useCallback() {
+  return isFunctional() ? _useCallback.apply(void 0, arguments) : useClassCallback.apply(void 0, arguments);
+}
+
+function useMemo() {
+  return isFunctional() ? _useMemo.apply(void 0, arguments) : useClassMemo.apply(void 0, arguments);
+}
+
+function useRef() {
+  return isFunctional() ? _useRef.apply(void 0, arguments) : useClassRef.apply(void 0, arguments);
+}
+
+function useContext() {
+  return isFunctional() ? _useContext.apply(void 0, arguments) : useClassContext.apply(void 0, arguments);
+}
+
+function useImperativeHandle() {
+  return isFunctional() ? _useImperativeHandle.apply(void 0, arguments) : useClassImperativeHandle.apply(void 0, arguments);
+}
+
+function useDebugValue() {
+  return isFunctional() ? _useDebugValue.apply(void 0, arguments) : useClassDebugValue.apply(void 0, arguments);
+}
+
+react__WEBPACK_IMPORTED_MODULE_0__.useState = useState;
+react__WEBPACK_IMPORTED_MODULE_0__.useReducer = useReducer;
+react__WEBPACK_IMPORTED_MODULE_0__.useEffect = useEffect;
+react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect = useLayoutEffect;
+react__WEBPACK_IMPORTED_MODULE_0__.useCallback = useCallback;
+react__WEBPACK_IMPORTED_MODULE_0__.useMemo = useMemo;
+react__WEBPACK_IMPORTED_MODULE_0__.useRef = useRef;
+react__WEBPACK_IMPORTED_MODULE_0__.useContext = useContext;
+react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle = useImperativeHandle;
+react__WEBPACK_IMPORTED_MODULE_0__.useDebugValue = useDebugValue;
+
+
+
+
+/***/ }),
+/* 62 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37795,27 +38393,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Vector2": () => (/* reexport safe */ _Utils_VectorStructs_js__WEBPACK_IMPORTED_MODULE_20__.Vector2),
 /* harmony export */   "Vector3": () => (/* reexport safe */ _Utils_VectorStructs_js__WEBPACK_IMPORTED_MODULE_20__.Vector3)
 /* harmony export */ });
-/* harmony import */ var _ClassExtensions_CE_Array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62);
-/* harmony import */ var _ClassExtensions_CE_Element_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(68);
-/* harmony import */ var _ClassExtensions_CE_Number_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(69);
-/* harmony import */ var _ClassExtensions_CE_Object_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(71);
-/* harmony import */ var _ClassExtensions_CE_Others_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(72);
-/* harmony import */ var _ClassExtensions_CE_String_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(70);
-/* harmony import */ var _ClassExtensions_CE_Auto_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(73);
-/* harmony import */ var _JSVE_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(74);
-/* harmony import */ var _Utils_Assert_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(67);
-/* harmony import */ var _Utils_Bridge_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(75);
-/* harmony import */ var _Utils_Changes_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(77);
-/* harmony import */ var _Utils_Collections_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(66);
-/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(63);
-/* harmony import */ var _Utils_Numbers_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(78);
-/* harmony import */ var _Utils_Promises_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(79);
-/* harmony import */ var _Utils_Serialization_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(80);
-/* harmony import */ var _Utils_Timers_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(76);
-/* harmony import */ var _Utils_Types_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(64);
-/* harmony import */ var _Utils_URLs_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(81);
-/* harmony import */ var _Utils_VCache_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(82);
-/* harmony import */ var _Utils_VectorStructs_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(83);
+/* harmony import */ var _ClassExtensions_CE_Array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
+/* harmony import */ var _ClassExtensions_CE_Element_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(69);
+/* harmony import */ var _ClassExtensions_CE_Number_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(70);
+/* harmony import */ var _ClassExtensions_CE_Object_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(72);
+/* harmony import */ var _ClassExtensions_CE_Others_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(73);
+/* harmony import */ var _ClassExtensions_CE_String_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(71);
+/* harmony import */ var _ClassExtensions_CE_Auto_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(74);
+/* harmony import */ var _JSVE_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(75);
+/* harmony import */ var _Utils_Assert_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(68);
+/* harmony import */ var _Utils_Bridge_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(76);
+/* harmony import */ var _Utils_Changes_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(78);
+/* harmony import */ var _Utils_Collections_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(67);
+/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(64);
+/* harmony import */ var _Utils_Numbers_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(79);
+/* harmony import */ var _Utils_Promises_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(80);
+/* harmony import */ var _Utils_Serialization_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(81);
+/* harmony import */ var _Utils_Timers_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(77);
+/* harmony import */ var _Utils_Types_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(65);
+/* harmony import */ var _Utils_URLs_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(82);
+/* harmony import */ var _Utils_VCache_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(83);
+/* harmony import */ var _Utils_VectorStructs_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(84);
 //import "./ClassExtensions";
 //export * from "./ClassExtensions/@ApplyCode.js";
 //export * from "./ClassExtensions/@ApplyTypes.js"; // if desired, user project should import directly (from Source folder)
@@ -37843,7 +38441,7 @@ __webpack_require__.r(__webpack_exports__);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37853,9 +38451,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ArrayCE": () => (/* binding */ ArrayCE),
 /* harmony export */   "ArrayCES": () => (/* binding */ ArrayCES)
 /* harmony export */ });
-/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
-/* harmony import */ var _Utils_Assert_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(67);
-/* harmony import */ var _Utils_Types_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(64);
+/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
+/* harmony import */ var _Utils_Assert_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(68);
+/* harmony import */ var _Utils_Types_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(65);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -38263,7 +38861,7 @@ export const NodeListCE = CreateProxyForClassExtensions(NodeListCEProxy);*/
 //# sourceMappingURL=CE_Array.js.map
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38318,10 +38916,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RemoveCircularLinks_specialTypeHandlers": () => (/* binding */ RemoveCircularLinks_specialTypeHandlers),
 /* harmony export */   "RemoveCircularLinks": () => (/* binding */ RemoveCircularLinks)
 /* harmony export */ });
-/* harmony import */ var _Types_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
-/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(61);
-/* harmony import */ var _Internal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(65);
-/* harmony import */ var _Collections_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(66);
+/* harmony import */ var _Types_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(65);
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(62);
+/* harmony import */ var _Internal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(66);
+/* harmony import */ var _Collections_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(67);
 
 
 
@@ -39017,7 +39615,7 @@ function RemoveCircularLinks(node, specialTypeHandlers = RemoveCircularLinks_spe
 //# sourceMappingURL=General.js.map
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -39049,7 +39647,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "GetValues_ForSchema": () => (/* binding */ GetValues_ForSchema),
 /* harmony export */   "CreateStringEnum": () => (/* binding */ CreateStringEnum)
 /* harmony export */ });
-/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
+/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
 
 // standard types
 // ----------
@@ -39190,7 +39788,7 @@ function CreateStringEnum(keysObj) {
 //# sourceMappingURL=Types.js.map
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -39202,7 +39800,7 @@ const g = typeof window == "object" ? window : global;
 //# sourceMappingURL=@Internal.js.map
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -39222,7 +39820,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "IsSpecialEmptyArray": () => (/* binding */ IsSpecialEmptyArray),
 /* harmony export */   "EmptyArrayFor": () => (/* binding */ EmptyArrayFor)
 /* harmony export */ });
-/* harmony import */ var _Assert_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(67);
+/* harmony import */ var _Assert_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(68);
 
 // use singletons for empty-obj and empty-array (that way shallow-compare systems in react, redux, etc. work with them)
 const emptyObj = {};
@@ -39262,7 +39860,7 @@ function EmptyArrayFor(base) {
 //# sourceMappingURL=Collections.js.map
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -39276,7 +39874,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "A_OfType_Wrapper": () => (/* binding */ A_OfType_Wrapper),
 /* harmony export */   "NN": () => (/* binding */ NN)
 /* harmony export */ });
-/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
+/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
 
 //export function Assert(condition, messageOrMessageFunc?: string | Function, triggerDebugger = true): condition is true {
 function Assert(condition, messageOrMessageFunc, triggerDebugger = true) {
@@ -39352,7 +39950,7 @@ function NN(val) {
 //# sourceMappingURL=Assert.js.map
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -39362,7 +39960,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ElementCE": () => (/* binding */ ElementCE),
 /* harmony export */   "ElementCES": () => (/* binding */ ElementCES)
 /* harmony export */ });
-/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
+/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
 
 const ElementCE_funcs = {
     GetParents(topDown = false) {
@@ -39413,7 +40011,7 @@ const ElementCES = (0,_Utils_General_js__WEBPACK_IMPORTED_MODULE_0__.WithFuncsSt
 //# sourceMappingURL=CE_Element.js.map
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -39423,9 +40021,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "NumberCE": () => (/* binding */ NumberCE),
 /* harmony export */   "NumberCES": () => (/* binding */ NumberCES)
 /* harmony export */ });
-/* harmony import */ var _CE_String_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(70);
-/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63);
-/* harmony import */ var _Utils_Types_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(64);
+/* harmony import */ var _CE_String_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(71);
+/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(64);
+/* harmony import */ var _Utils_Types_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(65);
 
 
 
@@ -39540,7 +40138,7 @@ const NumberCES = (0,_Utils_General_js__WEBPACK_IMPORTED_MODULE_1__.WithFuncsSta
 //# sourceMappingURL=CE_Number.js.map
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -39550,8 +40148,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "StringCE": () => (/* binding */ StringCE),
 /* harmony export */   "StringCES": () => (/* binding */ StringCES)
 /* harmony export */ });
-/* harmony import */ var _CE_Array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62);
-/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63);
+/* harmony import */ var _CE_Array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
+/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(64);
 
 
 const StringCE_funcs = {
@@ -39765,7 +40363,7 @@ const StringCES = (0,_Utils_General_js__WEBPACK_IMPORTED_MODULE_1__.WithFuncsSta
 //# sourceMappingURL=CE_String.js.map
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -39775,10 +40373,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ObjectCE": () => (/* binding */ ObjectCE),
 /* harmony export */   "ObjectCES": () => (/* binding */ ObjectCES)
 /* harmony export */ });
-/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
-/* harmony import */ var _Utils_Types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(64);
-/* harmony import */ var _CE_Array_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(62);
-/* harmony import */ var _CE_Others_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(72);
+/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
+/* harmony import */ var _Utils_Types_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(65);
+/* harmony import */ var _CE_Array_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63);
+/* harmony import */ var _CE_Others_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(73);
 
 
 
@@ -40082,7 +40680,7 @@ const ObjectCES = (0,_Utils_General_js__WEBPACK_IMPORTED_MODULE_0__.WithFuncsSta
 //# sourceMappingURL=CE_Object.js.map
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40095,8 +40693,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DateCE": () => (/* binding */ DateCE),
 /* harmony export */   "DateCES": () => (/* binding */ DateCES)
 /* harmony export */ });
-/* harmony import */ var _Utils_Assert_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(67);
-/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63);
+/* harmony import */ var _Utils_Assert_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(68);
+/* harmony import */ var _Utils_General_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(64);
 
 
 /*
@@ -40224,7 +40822,7 @@ export const ErrorCE = CreateProxyForClassExtensions(ErrorCEProxy);*/
 //# sourceMappingURL=CE_Others.js.map
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40232,13 +40830,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CE": () => (/* binding */ CE)
 /* harmony export */ });
-/* harmony import */ var _CE_Array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62);
-/* harmony import */ var _CE_Number_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(69);
-/* harmony import */ var _CE_Object_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(71);
-/* harmony import */ var _CE_String_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(70);
-/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(61);
-/* harmony import */ var _Utils_Types_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(64);
-/* harmony import */ var _CE_Others_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72);
+/* harmony import */ var _CE_Array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
+/* harmony import */ var _CE_Number_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(70);
+/* harmony import */ var _CE_Object_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(72);
+/* harmony import */ var _CE_String_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(71);
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(62);
+/* harmony import */ var _Utils_Types_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(65);
+/* harmony import */ var _CE_Others_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(73);
 
 
 
@@ -40293,7 +40891,7 @@ function CE(obj, checkForUncommonDerived = false) {
 //# sourceMappingURL=CE_Auto.js.map
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40306,7 +40904,7 @@ class JSVE {
 //# sourceMappingURL=JSVE.js.map
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40315,9 +40913,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "BridgeMessage": () => (/* binding */ BridgeMessage),
 /* harmony export */   "Bridge": () => (/* binding */ Bridge)
 /* harmony export */ });
-/* harmony import */ var _Timers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76);
-/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(61);
-/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63);
+/* harmony import */ var _Timers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(77);
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(62);
+/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(64);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -40510,7 +41108,7 @@ class Bridge {
 //# sourceMappingURL=Bridge.js.map
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40528,8 +41126,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TimerS": () => (/* binding */ TimerS),
 /* harmony export */   "BufferAction": () => (/* binding */ BufferAction)
 /* harmony export */ });
-/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61);
-/* harmony import */ var _Internal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(65);
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62);
+/* harmony import */ var _Internal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(66);
 
 
 class TimerContext {
@@ -40748,7 +41346,7 @@ function BufferAction(...args) {
 //# sourceMappingURL=Timers.js.map
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40756,7 +41354,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "GetPropChanges": () => (/* binding */ GetPropChanges)
 /* harmony export */ });
-/* harmony import */ var _ClassExtensions_CE_Array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62);
+/* harmony import */ var _ClassExtensions_CE_Array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
 
 function GetPropChanges(oldObj, newObj, returnNullIfSame = false, useJSONCompare = false) {
     oldObj = oldObj || {}, newObj = newObj || {};
@@ -40788,7 +41386,7 @@ function GetPropChanges(oldObj, newObj, returnNullIfSame = false, useJSONCompare
 //# sourceMappingURL=Changes.js.map
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40802,7 +41400,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CreateRandFunc_Mulberry32": () => (/* binding */ CreateRandFunc_Mulberry32),
 /* harmony export */   "GetRandomNumber": () => (/* binding */ GetRandomNumber)
 /* harmony export */ });
-/* harmony import */ var _ClassExtensions_CE_Number_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(69);
+/* harmony import */ var _ClassExtensions_CE_Number_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(70);
 
 /*export function Range(min, max, step = 1, includeMax = true) {
     var result: number[] = [];
@@ -40877,7 +41475,7 @@ function GetRandomNumber(options) {
 //# sourceMappingURL=Numbers.js.map
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40887,7 +41485,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "WaitTillPropertyIsSet": () => (/* binding */ WaitTillPropertyIsSet),
 /* harmony export */   "AwaitTree": () => (/* binding */ AwaitTree)
 /* harmony export */ });
-/* harmony import */ var _ClassExtensions_CE_Object_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(71);
+/* harmony import */ var _ClassExtensions_CE_Object_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(72);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -40945,7 +41543,7 @@ function AwaitTree(obj) {
 //# sourceMappingURL=Promises.js.map
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40961,9 +41559,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Clone": () => (/* binding */ Clone),
 /* harmony export */   "CloneWithPrototypes": () => (/* binding */ CloneWithPrototypes)
 /* harmony export */ });
-/* harmony import */ var _ClassExtensions_CE_Array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62);
-/* harmony import */ var _Assert_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(67);
-/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63);
+/* harmony import */ var _ClassExtensions_CE_Array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
+/* harmony import */ var _Assert_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(68);
+/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(64);
 
 
 
@@ -41145,7 +41743,7 @@ function CloneWithPrototypes(originalObject, keepCircularLinks = false) {
 //# sourceMappingURL=Serialization.js.map
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -41158,7 +41756,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "VURL": () => (/* binding */ VURL),
 /* harmony export */   "QueryVar": () => (/* binding */ QueryVar)
 /* harmony export */ });
-/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61);
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62);
 
 // Note: It's fine to use `window` instead of `g` in the below, since it fails outside of browsers anyway.
 function ToAbsoluteUrl(url) {
@@ -41384,7 +41982,7 @@ export function GetPath(path = GetUrlPath(), makeFull = true) {
 //# sourceMappingURL=URLs.js.map
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -41396,8 +41994,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CachedTransform": () => (/* binding */ CachedTransform),
 /* harmony export */   "CombineDynamicPropMaps": () => (/* binding */ CombineDynamicPropMaps)
 /* harmony export */ });
-/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
-/* harmony import */ var _ClassExtensions_CE_Array_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(62);
+/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
+/* harmony import */ var _ClassExtensions_CE_Array_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63);
 
 
 class Storage {
@@ -41449,7 +42047,7 @@ function CombineDynamicPropMaps(...maps) {
 //# sourceMappingURL=VCache.js.map
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -41463,8 +42061,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "VRect": () => (/* binding */ VRect),
 /* harmony export */   "VBounds": () => (/* binding */ VBounds)
 /* harmony export */ });
-/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
-/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(61);
+/* harmony import */ var _General_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(62);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41755,7 +42353,7 @@ VBounds = __decorate([
 //# sourceMappingURL=VectorStructs.js.map
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -41777,9 +42375,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "inject": () => (/* binding */ inject),
 /* harmony export */   "observer": () => (/* binding */ observer)
 /* harmony export */ });
-/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(87);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(88);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var mobx_react_lite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(85);
+/* harmony import */ var mobx_react_lite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(86);
 
 
 
@@ -42559,7 +43157,7 @@ if (!mobx__WEBPACK_IMPORTED_MODULE_2__.observable) throw new Error("mobx-react r
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -42578,18 +43176,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "observerBatching": () => (/* reexport safe */ _utils_observerBatching__WEBPACK_IMPORTED_MODULE_2__.observerBatching),
 /* harmony export */   "useStaticRendering": () => (/* binding */ useStaticRendering)
 /* harmony export */ });
-/* harmony import */ var _utils_assertEnvironment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86);
-/* harmony import */ var _utils_reactBatchedUpdates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(88);
-/* harmony import */ var _utils_observerBatching__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(89);
-/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(90);
-/* harmony import */ var _useObserver__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(91);
-/* harmony import */ var _staticRendering__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(98);
-/* harmony import */ var _observer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(99);
-/* harmony import */ var _ObserverComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(100);
-/* harmony import */ var _useLocalObservable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(101);
-/* harmony import */ var _useLocalStore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(102);
-/* harmony import */ var _useAsObservableSource__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(103);
-/* harmony import */ var _utils_reactionCleanupTracking__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(93);
+/* harmony import */ var _utils_assertEnvironment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(87);
+/* harmony import */ var _utils_reactBatchedUpdates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(89);
+/* harmony import */ var _utils_observerBatching__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(90);
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(91);
+/* harmony import */ var _useObserver__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(92);
+/* harmony import */ var _staticRendering__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(99);
+/* harmony import */ var _observer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(100);
+/* harmony import */ var _ObserverComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(101);
+/* harmony import */ var _useLocalObservable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(102);
+/* harmony import */ var _useLocalStore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(103);
+/* harmony import */ var _useAsObservableSource__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(104);
+/* harmony import */ var _utils_reactionCleanupTracking__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(94);
 
 
 
@@ -42621,12 +43219,12 @@ function useStaticRendering(enable) {
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(87);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(88);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 
 
@@ -42639,7 +43237,7 @@ if (!mobx__WEBPACK_IMPORTED_MODULE_1__.makeObservable) {
 //# sourceMappingURL=assertEnvironment.js.map
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48493,7 +49091,7 @@ if (typeof __MOBX_DEVTOOLS_GLOBAL_HOOK__ === "object") {
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48506,7 +49104,7 @@ __webpack_require__.r(__webpack_exports__);
 //# sourceMappingURL=reactBatchedUpdates.js.map
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48516,7 +49114,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "observerBatching": () => (/* binding */ observerBatching),
 /* harmony export */   "isObserverBatched": () => (/* binding */ isObserverBatched)
 /* harmony export */ });
-/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(87);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(88);
 
 function defaultNoopBatch(callback) {
     callback();
@@ -48539,7 +49137,7 @@ var isObserverBatched = function () {
 //# sourceMappingURL=observerBatching.js.map
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48557,7 +49155,7 @@ function useDeprecated(msg) {
 //# sourceMappingURL=utils.js.map
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48565,11 +49163,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "useObserver": () => (/* binding */ useObserver)
 /* harmony export */ });
-/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(87);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(88);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _utils_printDebugValue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(92);
-/* harmony import */ var _utils_reactionCleanupTracking__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93);
-/* harmony import */ var _staticRendering__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(98);
+/* harmony import */ var _utils_printDebugValue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(93);
+/* harmony import */ var _utils_reactionCleanupTracking__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(94);
+/* harmony import */ var _staticRendering__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(99);
 var __read = (undefined && undefined.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -48698,7 +49296,7 @@ function useObserver(fn, baseComponentName) {
 //# sourceMappingURL=useObserver.js.map
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48706,7 +49304,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "printDebugValue": () => (/* binding */ printDebugValue)
 /* harmony export */ });
-/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(87);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(88);
 
 function printDebugValue(v) {
     return (0,mobx__WEBPACK_IMPORTED_MODULE_0__.getDependencyTree)(v);
@@ -48714,7 +49312,7 @@ function printDebugValue(v) {
 //# sourceMappingURL=printDebugValue.js.map
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48725,9 +49323,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "resetCleanupScheduleForTests": () => (/* binding */ resetCleanupScheduleForTests),
 /* harmony export */   "forceCleanupTimerToRunNowForTests": () => (/* binding */ forceCleanupTimerToRunNowForTests)
 /* harmony export */ });
-/* harmony import */ var _FinalizationRegistryWrapper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(94);
-/* harmony import */ var _createReactionCleanupTrackingUsingFinalizationRegister__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(95);
-/* harmony import */ var _createTimerBasedReactionCleanupTracking__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(97);
+/* harmony import */ var _FinalizationRegistryWrapper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(95);
+/* harmony import */ var _createReactionCleanupTrackingUsingFinalizationRegister__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(96);
+/* harmony import */ var _createTimerBasedReactionCleanupTracking__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(98);
 
 
 
@@ -48738,7 +49336,7 @@ var _a = _FinalizationRegistryWrapper__WEBPACK_IMPORTED_MODULE_0__.FinalizationR
 //# sourceMappingURL=reactionCleanupTracking.js.map
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48751,7 +49349,7 @@ var FinalizationRegistryLocal = typeof FinalizationRegistry === "undefined" ? un
 //# sourceMappingURL=FinalizationRegistryWrapper.js.map
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48759,7 +49357,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createReactionCleanupTrackingUsingFinalizationRegister": () => (/* binding */ createReactionCleanupTrackingUsingFinalizationRegister)
 /* harmony export */ });
-/* harmony import */ var _reactionCleanupTrackingCommon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(96);
+/* harmony import */ var _reactionCleanupTrackingCommon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(97);
 
 /**
  * FinalizationRegistry-based uncommitted reaction cleanup
@@ -48800,7 +49398,7 @@ function createReactionCleanupTrackingUsingFinalizationRegister(FinalizationRegi
 //# sourceMappingURL=createReactionCleanupTrackingUsingFinalizationRegister.js.map
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48833,7 +49431,7 @@ var CLEANUP_TIMER_LOOP_MILLIS = 10000;
 //# sourceMappingURL=reactionCleanupTrackingCommon.js.map
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48841,7 +49439,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createTimerBasedReactionCleanupTracking": () => (/* binding */ createTimerBasedReactionCleanupTracking)
 /* harmony export */ });
-/* harmony import */ var _reactionCleanupTrackingCommon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(96);
+/* harmony import */ var _reactionCleanupTrackingCommon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(97);
 var __values = (undefined && undefined.__values) || function(o) {
     var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
     if (m) return m.call(o);
@@ -48962,7 +49560,7 @@ function createTimerBasedReactionCleanupTracking() {
 //# sourceMappingURL=createTimerBasedReactionCleanupTracking.js.map
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48981,7 +49579,7 @@ function isUsingStaticRendering() {
 //# sourceMappingURL=staticRendering.js.map
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -48990,8 +49588,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "observer": () => (/* binding */ observer)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _staticRendering__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(98);
-/* harmony import */ var _useObserver__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(91);
+/* harmony import */ var _staticRendering__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(99);
+/* harmony import */ var _useObserver__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(92);
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -49053,7 +49651,7 @@ function copyStaticProperties(base, target) {
 //# sourceMappingURL=observer.js.map
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -49061,7 +49659,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Observer": () => (/* binding */ ObserverComponent)
 /* harmony export */ });
-/* harmony import */ var _useObserver__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(91);
+/* harmony import */ var _useObserver__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(92);
 
 function ObserverComponent(_a) {
     var children = _a.children, render = _a.render;
@@ -49101,7 +49699,7 @@ function ObserverPropsCheck(props, key, componentName, location, propFullName) {
 //# sourceMappingURL=ObserverComponent.js.map
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -49109,7 +49707,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "useLocalObservable": () => (/* binding */ useLocalObservable)
 /* harmony export */ });
-/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(87);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(88);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 
 
@@ -49119,7 +49717,7 @@ function useLocalObservable(initializer, annotations) {
 //# sourceMappingURL=useLocalObservable.js.map
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -49127,10 +49725,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "useLocalStore": () => (/* binding */ useLocalStore)
 /* harmony export */ });
-/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(87);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(88);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(90);
-/* harmony import */ var _useAsObservableSource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(103);
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(91);
+/* harmony import */ var _useAsObservableSource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(104);
 
 
 
@@ -49144,7 +49742,7 @@ function useLocalStore(initializer, current) {
 //# sourceMappingURL=useLocalStore.js.map
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -49152,8 +49750,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "useAsObservableSource": () => (/* binding */ useAsObservableSource)
 /* harmony export */ });
-/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(90);
-/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(87);
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(91);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(88);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 var __read = (undefined && undefined.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
@@ -49186,597 +49784,6 @@ function useAsObservableSource(current) {
 //# sourceMappingURL=useAsObservableSource.js.map
 
 /***/ }),
-/* 104 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "supportReactDevTools": () => (/* binding */ supportReactDevTools)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-var isProduction = process.env.NODE_ENV === 'production';
-var prefix = 'Invariant failed';
-function invariant(condition, message) {
-    if (condition) {
-        return;
-    }
-    if (isProduction) {
-        throw new Error(prefix);
-    }
-    throw new Error(prefix + ": " + (message || ''));
-}
-
-react__WEBPACK_IMPORTED_MODULE_0__.PureComponent.prototype.componentDidMount = function () {};
-
-react__WEBPACK_IMPORTED_MODULE_0__.Component.prototype.componentDidMount = function () {};
-
-invariant(typeof Symbol === 'function' && Symbol["for"], 'react-class-hooks needs Symbols!'); // Separate objects for better debugging.
-
-var MAGIC_STATES = Symbol["for"]('magicStates');
-var MAGIC_EFFECTS = Symbol["for"]('magicEffects');
-var MAGIC_MEMOS = Symbol["for"]('magicMemos');
-var MAGIC_REFS = Symbol["for"]('magicRefs');
-var MAGIC_STACKS = Symbol["for"]('magicStacks');
-var ReactInternals = react__WEBPACK_IMPORTED_MODULE_0__.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-var isReact15 = react__WEBPACK_IMPORTED_MODULE_0__.version.indexOf('15') === 0; // React 15.3.2 support + Polyfill
-
-var instanceKey = isReact15 ? '_instance' : 'stateNode';
-
-if (isReact15) {
-  invariant(ReactInternals, 'Please for React ^15.3.2 - 15.6.2 import "react-class-hooks/poly15" in your root index.js!');
-}
-
-function getMagicSelf() {
-  invariant(ReactInternals.ReactCurrentOwner.current, 'You are using Hooks outside of "render" React.Component Method!');
-  return ReactInternals.ReactCurrentOwner.current[instanceKey];
-}
-var getMagicDispatcher = function getMagicDispatcher() {
-  return ReactInternals.ReactCurrentDispatcher.current;
-};
-function checkSymbol(name, keySymbol) {
-  invariant(_typeof(keySymbol) === 'symbol', "".concat(name, " - Expected a Symbol for key!"));
-}
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-function MagicStack(StackName) {
-  var _this = this;
-
-  this.name = StackName;
-  this.symbol = Symbol("".concat(this.name, ".Stack")); // this.cleanSymbol = Symbol(`${this.name}.Stack.Cleaner`);
-
-  this.keys = [];
-
-  this.getKey = function (stackIndex) {
-    var len = _this.keys.length; // create if not exist
-
-    if (stackIndex > len) {
-      for (var i = len; i < stackIndex; i += 1) {
-        _this.keys.push(Symbol("".concat(_this.name, "-").concat(i)));
-      }
-    }
-
-    return _this.keys[stackIndex - 1];
-  };
-}
-function useMagicStack(magicStack, hook) {
-  // inject next renders stack counter cleaner
-  var self = getMagicSelf();
-
-  if (!self[MAGIC_STACKS]) {
-    self[MAGIC_STACKS] = {};
-    var renderFunc = self.render.bind(self);
-
-    self.render = function () {
-      Object.getOwnPropertySymbols(self[MAGIC_STACKS]).forEach(function (k) {
-        self[MAGIC_STACKS][k] = 0;
-      });
-      return renderFunc.apply(void 0, arguments);
-    };
-  } // stack counter init
-
-
-  if (!self[MAGIC_STACKS][magicStack.symbol]) {
-    self[MAGIC_STACKS][magicStack.symbol] = 0;
-  } // stack counter update
-
-
-  self[MAGIC_STACKS][magicStack.symbol] += 1;
-
-  for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-    args[_key - 2] = arguments[_key];
-  }
-
-  return hook.apply(void 0, [magicStack.getKey(self[MAGIC_STACKS][magicStack.symbol])].concat(args));
-}
-
-function createHook(stackName, hook) {
-  var stack = new MagicStack(stackName);
-  return function () {
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    if (args && args.length && _typeof(args[0]) === 'symbol') return hook.apply(void 0, args);
-    return useMagicStack.apply(void 0, [stack, hook].concat(args));
-  };
-}
-function createNamedHook(name, hook) {
-  var keySymbol = Symbol(name);
-  return hook.bind(null, keySymbol);
-}
-
-var devToolConfig = {
-  active: false,
-  stateKey: '__UNIVERSAL_HOOKS__',
-  show: 'object' // object, array, map
-
-};
-function supportReactDevTools(_ref) {
-  var active = _ref.active,
-      stateKey = _ref.stateKey,
-      show = _ref.show;
-  if (stateKey) devToolConfig.stateKey = stateKey;
-  if (show) devToolConfig.show = show;
-  devToolConfig.active = !!active;
-}
-function setDevToolsHookState(name, state) {
-  if (devToolConfig.active) {
-    var self = getMagicSelf();
-    var stateKey = devToolConfig.stateKey,
-        show = devToolConfig.show;
-    if (!self.state) self.state = {};
-    if (!self.state[stateKey]) self.state[stateKey] = show === 'map' ? new Map() : show === 'array' ? [] : {};
-
-    if (show === 'map') {
-      self.state[stateKey].set(name, state);
-    } else if (show === 'array') {
-      var hookState = self.state[stateKey].find(function (h) {
-        return h.hasOwnProperty(name);
-      });
-
-      if (hookState) {
-        hookState[name] = state;
-      } else {
-        self.state[stateKey].push(_defineProperty({}, name, state));
-      }
-    } else {
-      var hookNames = Object.keys(self.state[stateKey]);
-      var hookName = hookNames.find(function (s) {
-        return s.split(':')[1] === name;
-      });
-      self.state[stateKey][hookName || "".concat(hookNames.length.toString().padStart(2, '0'), ":").concat(name)] = state;
-    }
-  }
-}
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-function useClassStateKey(keySymbol, initialValue) {
-  checkSymbol('useClassStateKey', keySymbol);
-  var self = getMagicSelf(); // first time Render && first Hook
-
-  if (!self[MAGIC_STATES]) self[MAGIC_STATES] = {}; // first time Render -> assign initial Value and create Setter
-
-  if (!self[MAGIC_STATES].hasOwnProperty(keySymbol)) {
-    self[MAGIC_STATES][keySymbol] = {
-      value: typeof initialValue === 'function' ? initialValue() : initialValue,
-      setValue: function setValue(value, callback) {
-        var newState = typeof value === 'function' ? value(self[MAGIC_STATES][keySymbol].value) : value;
-
-        if (self[MAGIC_STATES][keySymbol].value !== newState) {
-          self[MAGIC_STATES][keySymbol].value = newState;
-
-          if (self.updater.isMounted(self)) {
-            self.updater.enqueueForceUpdate(self, callback);
-          }
-        }
-      }
-    };
-  }
-
-  var _self$MAGIC_STATES$ke = self[MAGIC_STATES][keySymbol],
-      value = _self$MAGIC_STATES$ke.value,
-      setValue = _self$MAGIC_STATES$ke.setValue;
-  setDevToolsHookState(keySymbol.description, value);
-  return [value, setValue];
-}
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-var useClassState = createHook('States', useClassStateKey);
-
-useClassState.create = function (name) {
-  return createNamedHook(name, useClassStateKey);
-};
-
-useClassState.createStack = function (stackName) {
-  return createHook(stackName, useClassStateKey);
-};
-
-function inputsArrayEqual(inputs, prevInputs) {
-  invariant(inputs.length === prevInputs.length, 'Hooks inputs array length should be constant between renders!'); // Object.is polyfill
-
-  for (var i = 0; i < inputs.length; i += 1) {
-    var val1 = inputs[i];
-    var val2 = prevInputs[i];
-
-    if (!(val1 === val2 && (val1 !== 0 || 1 / val1 === 1 / val2) || val1 !== val1 && val2 !== val2)) {
-      // eslint-disable-line
-      return false;
-    }
-  }
-
-  return true;
-}
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-var useClassEffectKey = function useClassEffectKey(keySymbol, creator, inputs) {
-  var onlyDidUpdate = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-  checkSymbol('useClassEffect', keySymbol);
-  invariant(typeof creator === 'function', 'Creator should be a function!');
-  invariant(!inputs || Array.isArray(inputs), 'inputs should be an array!');
-  var self = getMagicSelf(); // create MAGIC_EFFECTS if not exists
-
-  if (!self[MAGIC_EFFECTS]) self[MAGIC_EFFECTS] = {}; // First Render -> Assign creator, inputs and inject methods
-  // TODO didCatch
-
-  if (!self[MAGIC_EFFECTS].hasOwnProperty(keySymbol)) {
-    self[MAGIC_EFFECTS][keySymbol] = {
-      creator: creator,
-      inputs: inputs
-    };
-
-    if (!onlyDidUpdate) {
-      // inject componentDidMount
-      var didMount = typeof self.componentDidMount === 'function' ? self.componentDidMount.bind(self) : undefined;
-
-      self.componentDidMount = function () {
-        if (didMount) didMount();
-        self[MAGIC_EFFECTS][keySymbol].cleaner = self[MAGIC_EFFECTS][keySymbol].creator(); // save last executed inputs
-
-        self[MAGIC_EFFECTS][keySymbol].prevInputs = self[MAGIC_EFFECTS][keySymbol].inputs;
-        invariant(!self[MAGIC_EFFECTS][keySymbol].cleaner || typeof self[MAGIC_EFFECTS][keySymbol].cleaner === 'function', 'useClassEffect return (Effect Cleaner) should be Function or Void !');
-      };
-    } // inject componentDidUpdate
-
-
-    var didUpdate = typeof self.componentDidUpdate === 'function' ? self.componentDidUpdate.bind(self) : undefined;
-
-    self.componentDidUpdate = function () {
-      if (didUpdate) didUpdate.apply(void 0, arguments); // execute if no inputs || inputs array has values and values changed
-
-      var execute = !self[MAGIC_EFFECTS][keySymbol].inputs || !inputsArrayEqual(self[MAGIC_EFFECTS][keySymbol].inputs, self[MAGIC_EFFECTS][keySymbol].prevInputs);
-
-      if (execute) {
-        if (typeof self[MAGIC_EFFECTS][keySymbol].cleaner === 'function') self[MAGIC_EFFECTS][keySymbol].cleaner();
-        self[MAGIC_EFFECTS][keySymbol].cleaner = self[MAGIC_EFFECTS][keySymbol].creator(); // save last executed inputs!
-
-        self[MAGIC_EFFECTS][keySymbol].prevInputs = self[MAGIC_EFFECTS][keySymbol].inputs;
-        invariant(!self[MAGIC_EFFECTS][keySymbol].cleaner || typeof self[MAGIC_EFFECTS][keySymbol].cleaner === 'function', 'useClassEffect return (Effect Cleaner) should be Function or Void !');
-      }
-    }; // inject componentWillUnmount
-
-
-    var unmount = typeof self.componentWillUnmount === 'function' ? self.componentWillUnmount.bind(self) : undefined;
-
-    self.componentWillUnmount = function () {
-      if (unmount) unmount();
-      if (typeof self[MAGIC_EFFECTS][keySymbol].cleaner === 'function') self[MAGIC_EFFECTS][keySymbol].cleaner();
-    };
-  } else {
-    // next renders
-    self[MAGIC_EFFECTS][keySymbol].creator = creator;
-    self[MAGIC_EFFECTS][keySymbol].inputs = inputs;
-  }
-};
-
-var useClassEffect = createHook('Effects', useClassEffectKey);
-
-useClassEffect.create = function (name) {
-  return createNamedHook(name, useClassEffectKey);
-};
-
-useClassEffect.createStack = function (stackName) {
-  return createHook(stackName, useClassEffectKey);
-};
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-var useClassMemoKey = function useClassMemoKey(keySymbol, creator, inputs) {
-  checkSymbol('useClassMemo', keySymbol);
-  invariant(typeof creator === 'function', 'Creator should be a function!');
-  invariant(!inputs || Array.isArray(inputs), 'inputs should be an array!');
-  var self = getMagicSelf(); // create magic Memos if not exists
-
-  if (!self[MAGIC_MEMOS]) self[MAGIC_MEMOS] = {}; // First Render -> assign creator, inputs, value
-
-  if (!self[MAGIC_MEMOS].hasOwnProperty(keySymbol)) {
-    self[MAGIC_MEMOS][keySymbol] = {
-      creator: creator,
-      inputs: inputs,
-      value: creator()
-    };
-  } else {
-    // next renders
-    var execute = false;
-
-    if (!inputs) {
-      if (creator !== self[MAGIC_MEMOS][keySymbol].creator) {
-        execute = true;
-      }
-    } else {
-      execute = !inputsArrayEqual(inputs, self[MAGIC_MEMOS][keySymbol].inputs);
-    }
-
-    if (execute) {
-      self[MAGIC_MEMOS][keySymbol] = {
-        creator: creator,
-        inputs: inputs,
-        value: creator()
-      };
-    }
-  }
-
-  var returnValue = self[MAGIC_MEMOS][keySymbol].value;
-  setDevToolsHookState(keySymbol.description, returnValue);
-  return returnValue;
-};
-var useClassMemo = createHook('Memos', useClassMemoKey);
-
-useClassMemo.create = function (name) {
-  return createNamedHook(name, useClassMemoKey);
-};
-
-useClassMemo.createStack = function (stackName) {
-  return createHook(stackName, useClassMemoKey);
-};
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-function useClassCallbackKey(keySymbol, callback, inputs) {
-  return useClassMemoKey(keySymbol, function () {
-    return callback;
-  }, inputs);
-}
-var useClassCallback = createHook('Callbacks', useClassCallbackKey);
-
-useClassCallback.create = function (name) {
-  return createNamedHook(name, useClassCallbackKey);
-};
-
-useClassCallback.createStack = function (stackName) {
-  return createHook(stackName, useClassCallbackKey);
-};
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-var useClassReducerKey = function useClassReducerKey(keySymbol, reducer, initialState) {
-  var stateSetState = useClassStateKey(keySymbol, initialState);
-  var state = stateSetState[0];
-  var setState = stateSetState[1];
-
-  function dispatch(action) {
-    var nextState = reducer(state, action);
-    setState(nextState);
-  }
-
-  return [state, dispatch];
-};
-var useClassReducer = createHook('Reducers', useClassReducerKey);
-
-useClassReducer.create = function (name) {
-  return createNamedHook(name, useClassReducerKey);
-};
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-function useClassRefKey(keySymbol, initialValue) {
-  checkSymbol('useClassRefKey', keySymbol);
-  var self = getMagicSelf(); // first time Render && first Hook
-
-  if (!self[MAGIC_REFS]) self[MAGIC_REFS] = {}; // first time Render -> assign initial Value
-
-  if (!self[MAGIC_REFS].hasOwnProperty(keySymbol)) {
-    var ref = {
-      current: initialValue
-    };
-    Object.seal(ref);
-    self[MAGIC_REFS][keySymbol] = ref;
-  }
-
-  var returnValue = self[MAGIC_REFS][keySymbol];
-  setDevToolsHookState(keySymbol.description, returnValue);
-  return returnValue;
-}
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-var useClassRef = createHook('Refs', useClassRefKey);
-
-useClassRef.create = function (name) {
-  return createNamedHook(name, useClassRefKey);
-};
-
-useClassRef.createStack = function (stackName) {
-  return createHook(stackName, useClassRefKey);
-}; // poly 15 ref
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-function useClassContextKey(keySymbol, context, observedBits) {
-  checkSymbol('useClassContext', keySymbol);
-  getMagicSelf(); // invariant hook outside render method
-
-  invariant(context && context.Provider && context.Consumer, 'Context should be React.createContext object!');
-  var contextValue = getMagicDispatcher().readContext(context, observedBits);
-  setDevToolsHookState(keySymbol.description, contextValue);
-  return contextValue;
-}
-var useClassContext = createHook('Contexts', useClassContextKey);
-
-function useClassImperativeHandle(ref, create, deps) {
-  invariant(typeof create === 'function', "Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: ".concat(create !== null ? _typeof(create) : 'null'));
-  invariant(deps === null || deps === undefined || Array.isArray(deps), 'Hook received a final argument that is not an array!');
-  var effectDeps = deps !== null && deps !== undefined ? deps.concat([ref]) : null; // eslint-disable-next-line consistent-return
-
-  useClassEffect(function () {
-    if (typeof ref === 'function') {
-      var refCallback = ref;
-      refCallback(create()); // eslint-disable-next-line func-names
-
-      return function () {
-        refCallback(null);
-      };
-    }
-
-    if (ref !== null && ref !== undefined) {
-      var refObject = ref;
-      invariant(refObject.hasOwnProperty('current'), "Expected useImperativeHandle() first argument to either be a ref callback or React.createRef() object. Instead received: an object with keys {".concat(Object.keys(refObject).join(', '), "}"));
-      refObject.current = create(); // eslint-disable-next-line func-names
-
-      return function () {
-        refObject.current = null;
-      };
-    }
-  }, effectDeps);
-}
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-function useClassDebugValueKey(keySymbol, value, formatter) {
-  checkSymbol('useDebugValueKey', keySymbol);
-  var viewValue = typeof formatter === 'function' ? formatter(value) : value;
-  setDevToolsHookState(keySymbol.description, viewValue);
-}
-var useClassDebugValue = createHook('DebugValue', useClassDebugValueKey);
-
-/**
- *  https://github.com/salvoravida/react-class-hooks
- */
-var useClassLayoutEffect = useClassEffect;
-
-/**
- *  https://github.com/salvoravida/react-universal-hooks
- */
-var _useState = react__WEBPACK_IMPORTED_MODULE_0__.useState;
-var _useReducer = react__WEBPACK_IMPORTED_MODULE_0__.useReducer;
-var _useEffect = react__WEBPACK_IMPORTED_MODULE_0__.useEffect;
-var _useLayoutEffect = react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect;
-var _useCallback = react__WEBPACK_IMPORTED_MODULE_0__.useCallback;
-var _useMemo = react__WEBPACK_IMPORTED_MODULE_0__.useMemo;
-var _useRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef;
-var _useContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext;
-var _useImperativeHandle = react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle;
-var _useDebugValue = react__WEBPACK_IMPORTED_MODULE_0__.useDebugValue;
-var ReactInternals$1 = react__WEBPACK_IMPORTED_MODULE_0__.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-
-function isFunctional() {
-  var c = ReactInternals$1.ReactCurrentOwner.current;
-  return !c || !c.stateNode;
-}
-
-function useState() {
-  return isFunctional() ? _useState.apply(void 0, arguments) : useClassState.apply(void 0, arguments);
-}
-
-function useReducer() {
-  return isFunctional() ? _useReducer.apply(void 0, arguments) : useClassReducer.apply(void 0, arguments);
-}
-
-function useEffect() {
-  return isFunctional() ? _useEffect.apply(void 0, arguments) : useClassEffect.apply(void 0, arguments);
-}
-
-function useLayoutEffect() {
-  return isFunctional() ? _useLayoutEffect.apply(void 0, arguments) : useClassLayoutEffect.apply(void 0, arguments);
-}
-
-function useCallback() {
-  return isFunctional() ? _useCallback.apply(void 0, arguments) : useClassCallback.apply(void 0, arguments);
-}
-
-function useMemo() {
-  return isFunctional() ? _useMemo.apply(void 0, arguments) : useClassMemo.apply(void 0, arguments);
-}
-
-function useRef() {
-  return isFunctional() ? _useRef.apply(void 0, arguments) : useClassRef.apply(void 0, arguments);
-}
-
-function useContext() {
-  return isFunctional() ? _useContext.apply(void 0, arguments) : useClassContext.apply(void 0, arguments);
-}
-
-function useImperativeHandle() {
-  return isFunctional() ? _useImperativeHandle.apply(void 0, arguments) : useClassImperativeHandle.apply(void 0, arguments);
-}
-
-function useDebugValue() {
-  return isFunctional() ? _useDebugValue.apply(void 0, arguments) : useClassDebugValue.apply(void 0, arguments);
-}
-
-react__WEBPACK_IMPORTED_MODULE_0__.useState = useState;
-react__WEBPACK_IMPORTED_MODULE_0__.useReducer = useReducer;
-react__WEBPACK_IMPORTED_MODULE_0__.useEffect = useEffect;
-react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect = useLayoutEffect;
-react__WEBPACK_IMPORTED_MODULE_0__.useCallback = useCallback;
-react__WEBPACK_IMPORTED_MODULE_0__.useMemo = useMemo;
-react__WEBPACK_IMPORTED_MODULE_0__.useRef = useRef;
-react__WEBPACK_IMPORTED_MODULE_0__.useContext = useContext;
-react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle = useImperativeHandle;
-react__WEBPACK_IMPORTED_MODULE_0__.useDebugValue = useDebugValue;
-
-
-
-
-/***/ }),
 /* 105 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -49787,7 +49794,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "HSL": () => (/* binding */ HSL),
 /* harmony export */   "HSLA": () => (/* binding */ HSLA)
 /* harmony export */ });
-/* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61);
+/* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62);
 
 /** Converts color-props into a css color-string of the specified format. */
 function CSSColor(
@@ -49830,8 +49837,43 @@ __webpack_require__.r(__webpack_exports__);
 class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_2__.BaseComponent {
     render() {
         let {} = this.props;
-        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, null, "TODO")));
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, null,
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, { style: { flex: 33 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, null, "Accessors")),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, { style: { flex: 33 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, null, "Call plans")),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, { style: { flex: 34 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, null, "Call plan"))));
+    }
+}
+
+
+/***/ }),
+/* 107 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ExtrasUI": () => (/* binding */ ExtrasUI)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var react_vcomponents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(30);
+/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
+
+
+
+class ExtrasUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_2__.BaseComponent {
+    render() {
+        let {} = this.props;
+        let [text, setText] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Row, { style: { height: "100%" } },
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Column, { style: { width: 500 } },
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Code:"),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.TextArea, { style: { flex: 1, border: "1px solid black" }, value: text, onChange: val => setText(val) }),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_1__.Button, { text: "Run", onClick: () => {
+                        eval(text);
+                    } }))));
     }
 }
 

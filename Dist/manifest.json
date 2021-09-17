@@ -4,5 +4,7 @@
 	"description": "Developer tools for mobx and mobx-graphlink (if present), enabling: profiling, dependency-tree viewing, etc.",
 	"version": "0.0.1",
 	"author": "Venryx",
-	"devtools_page": "Root.html"
+	"devtools_page": "Root.html",
+	"@comment__content_security_policy": "Needed for eval helper on Extras panel to work. If not using it, can remove.",
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'" 
 }
