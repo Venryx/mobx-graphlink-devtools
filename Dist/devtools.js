@@ -1,0 +1,1 @@
+chrome.devtools.panels.create("MGL", null, "/panel.html", null);
