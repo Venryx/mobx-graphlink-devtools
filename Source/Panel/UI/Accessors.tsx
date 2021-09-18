@@ -1,4 +1,5 @@
 import {HSLA} from "@Shared/FromWVC";
+import {vScrollBar_width} from "@Shared/General";
 import {Assert, E} from "js-vextensions";
 import {runInAction} from "mobx";
 import {observer} from "mobx-react";
@@ -6,6 +7,8 @@ import {GetSelectedAccessorMeta, store} from "Panel/Store";
 import React, {useState} from "react";
 import {Button, Column, Row, Text} from "react-vcomponents";
 import {BaseComponent} from "react-vextensions";
+
+const columnWidths = [40, 20, 20, 20]
 
 declare const chrome;
 @observer
@@ -27,6 +30,12 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 							});
 						}}/>
 					</Row>
+					<Row style={{paddingRight: vScrollBar_width}}>
+						<Text style={{flex: columnWidths[0]}}>Name</Text>
+						<Text style={{flex: columnWidths[1]}}>Total run-time</Text>
+						<Text style={{flex: columnWidths[2]}}>Call count</Text>
+						<Text style={{flex: columnWidths[3]}}>Call plans</Text>
+					</Row>
 					<div style={{overflow: "auto"}}>
 						{store.accessorMetas.map((meta, index)=>{
 							const selected = store.selectedAccessorMeta_index == index;
@@ -39,7 +48,10 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 									onClick={()=>{
 										store.selectedAccessorMeta_index = index;
 									}}>
-									{meta.name}
+									<Text style={{flex: columnWidths[0], minWidth: 0}}>{meta.name}</Text>
+									<Text style={{flex: columnWidths[1], minWidth: 0}}>{(meta.totalRunTime / 1000).toFixed(3)}</Text>
+									<Text style={{flex: columnWidths[2], minWidth: 0}}>{meta.callCount}</Text>
+									<Text style={{flex: columnWidths[3], minWidth: 0}}>{meta.callPlansStored}</Text>
 								</Row>
 							);
 						})}

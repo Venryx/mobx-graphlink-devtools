@@ -4,6 +4,9 @@ import {makeObservable, observable} from "mobx";
 
 export class AccessorMeta {
 	name: string;
+	totalRunTime: number;
+	callCount: number;
+	callPlansStored: number;
 }
 
 export class RootState {

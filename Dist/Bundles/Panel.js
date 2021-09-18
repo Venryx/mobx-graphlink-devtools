@@ -49829,12 +49829,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AccessorsUI": () => (/* binding */ AccessorsUI)
 /* harmony export */ });
 /* harmony import */ var _Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(105);
-/* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(62);
-/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(85);
-/* harmony import */ var Panel_Store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(108);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
-/* harmony import */ var react_vcomponents__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(30);
-/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(18);
+/* harmony import */ var _Shared_General__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(109);
+/* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(62);
+/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(85);
+/* harmony import */ var Panel_Store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(108);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2);
+/* harmony import */ var react_vcomponents__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(30);
+/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -49848,46 +49849,57 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_5__.BaseComponent {
+
+const columnWidths = [40, 20, 20, 20];
+let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_6__.BaseComponent {
     render() {
         var _a;
         let {} = this.props;
-        return (react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Row, { style: { height: "100%" } },
-            react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Column, { style: { flex: 20 } },
-                react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Row, null,
-                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Text, null, "Accessors"),
-                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Button, { text: "Refresh", onClick: () => {
+        return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { style: { height: "100%" } },
+            react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 20 } },
+                react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, null, "Accessors"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { text: "Refresh", onClick: () => {
                             chrome.devtools.inspectedWindow.eval("globalThis.mglDevTools_hook.GetAccessorMetadatas()", (result, exceptionInfo) => {
-                                (0,js_vextensions__WEBPACK_IMPORTED_MODULE_1__.Assert)(Array.isArray(result), `Got invalid result:${result}`);
+                                (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.Assert)(Array.isArray(result), `Got invalid result:${result}`);
                                 /*if (result.length) {
                                     Assert(typeof result[0] == "string", `Invalid entry:${JSON.stringify(result[0])}`);
                                 }*/
-                                Panel_Store__WEBPACK_IMPORTED_MODULE_2__.store.accessorMetas = result;
+                                Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas = result;
                             });
                         } })),
-                react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", { style: { overflow: "auto" } }, Panel_Store__WEBPACK_IMPORTED_MODULE_2__.store.accessorMetas.map((meta, index) => {
-                    const selected = Panel_Store__WEBPACK_IMPORTED_MODULE_2__.store.selectedAccessorMeta_index == index;
-                    return (react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_1__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => {
-                            Panel_Store__WEBPACK_IMPORTED_MODULE_2__.store.selectedAccessorMeta_index = index;
-                        } }, meta.name));
+                react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { style: { paddingRight: _Shared_General__WEBPACK_IMPORTED_MODULE_1__.vScrollBar_width } },
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[0] } }, "Name"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[1] } }, "Total run-time"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[2] } }, "Call count"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[3] } }, "Call plans")),
+                react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { style: { overflow: "auto" } }, Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas.map((meta, index) => {
+                    const selected = Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index == index;
+                    return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => {
+                            Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index = index;
+                        } },
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[0], minWidth: 0 } }, meta.name),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[1], minWidth: 0 } }, (meta.totalRunTime / 1000).toFixed(3)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[2], minWidth: 0 } }, meta.callCount),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[3], minWidth: 0 } }, meta.callPlansStored)));
                 }))),
-            react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Column, { style: { flex: 40 } },
-                react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Row, null,
-                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Text, null,
-                        "Call plans (for: ", (_a = (0,Panel_Store__WEBPACK_IMPORTED_MODULE_2__.GetSelectedAccessorMeta)()) === null || _a === void 0 ? void 0 :
+            react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 40 } },
+                react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, null,
+                        "Call plans (for: ", (_a = (0,Panel_Store__WEBPACK_IMPORTED_MODULE_3__.GetSelectedAccessorMeta)()) === null || _a === void 0 ? void 0 :
                         _a.name,
                         ")"),
-                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Button, { text: "Refresh", onClick: () => {
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { text: "Refresh", onClick: () => {
                         } }))),
-            react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Column, { style: { flex: 40 } },
-                react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Row, null,
-                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Text, null, "Call plan"),
-                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Button, { text: "Refresh", onClick: () => {
+            react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 40 } },
+                react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, null, "Call plan"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { text: "Refresh", onClick: () => {
                         } })))));
     }
 };
 AccessorsUI = __decorate([
-    mobx_react__WEBPACK_IMPORTED_MODULE_6__.observer
+    mobx_react__WEBPACK_IMPORTED_MODULE_7__.observer
 ], AccessorsUI);
 
 
@@ -49980,6 +49992,24 @@ class AccessorMeta {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "totalRunTime", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "callCount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "callPlansStored", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
     }
 }
 class RootState {
@@ -50019,11 +50049,13 @@ G({ store });
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "O": () => (/* binding */ O)
+/* harmony export */   "O": () => (/* binding */ O),
+/* harmony export */   "vScrollBar_width": () => (/* binding */ vScrollBar_width)
 /* harmony export */ });
 /* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(88);
 
 const O = mobx__WEBPACK_IMPORTED_MODULE_0__.observable;
+const vScrollBar_width = 17;
 
 
 /***/ })
