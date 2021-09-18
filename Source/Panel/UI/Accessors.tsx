@@ -8,8 +8,8 @@ import React, {useState} from "react";
 import {Button, Column, Row, Text, TextInput} from "react-vcomponents";
 import {BaseComponent} from "react-vextensions";
 
-const columnWidths = [1, "0 50px", "0 50px", "0 50px", "0 50px", "0 50px", "0 50px"];
-const columnWidths2 = ["0 50px", 1, "0 50px", "0 50px", "0 50px", "0 50px", "0 50px"];
+const columnWidths = [1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px", "0 50px"];
+const columnWidths2 = ["0 50px", 1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px"];
 
 function RefreshAccessorMetas() {
 	chrome.devtools.inspectedWindow.eval("globalThis.mglDevTools_hook.GetAccessorMetadatas()", (result, exceptionInfo)=>{
@@ -37,12 +37,13 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 					</Row>
 					<Row style={{paddingRight: vScrollBar_width}}>
 						<Text style={{flex: columnWidths[0]}}>Name</Text>
-						<Text style={{flex: columnWidths[1], justifyContent: "end", fontSize: 11}}>Run-time</Text>
-						<Text style={{flex: columnWidths[2], justifyContent: "end"}}>1st RT</Text>
-						<Text style={{flex: columnWidths[3], justifyContent: "end"}}>Min RT</Text>
-						<Text style={{flex: columnWidths[4], justifyContent: "end"}}>Max RT</Text>
-						<Text style={{flex: columnWidths[5], justifyContent: "end"}}>Calls</Text>
-						<Text style={{flex: columnWidths[6], justifyContent: "end", fontSize: 11}}>Call plans</Text>
+						<Text style={{flex: columnWidths[1], justifyContent: "end", fontSize: 11}}>Run-time:</Text>
+						<Text style={{flex: columnWidths[2], justifyContent: "end"}}>Avg</Text>
+						<Text style={{flex: columnWidths[3], justifyContent: "end"}}>1st</Text>
+						<Text style={{flex: columnWidths[4], justifyContent: "end"}}>Min</Text>
+						<Text style={{flex: columnWidths[5], justifyContent: "end"}}>Max</Text>
+						<Text style={{flex: columnWidths[6], justifyContent: "end"}}>Calls</Text>
+						<Text style={{flex: columnWidths[7], justifyContent: "end", fontSize: 11}}>Call plans</Text>
 					</Row>
 					<div style={{overflowY: "scroll"}}>
 						{store.accessorMetas
@@ -58,11 +59,12 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 										onClick={()=>store.selectedAccessorMeta_index = index}>
 									<Text style={{flex: columnWidths[0], minWidth: 0, overflowWrap: "anywhere"}}>{meta.name}</Text>
 									<Text style={{flex: columnWidths[1], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.totalRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths[2], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.firstRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths[3], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.minRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths[4], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.maxRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths[5], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.callCount}</Text>
-									<Text style={{flex: columnWidths[6], minWidth: 0, justifyContent: "end"}}>{meta.callPlansStored}</Text>
+									<Text style={{flex: columnWidths[2], minWidth: 0, justifyContent: "end"}}>{(meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)}</Text>
+									<Text style={{flex: columnWidths[3], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.firstRunTime.toFixed(1)}</Text>
+									<Text style={{flex: columnWidths[4], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.minRunTime.toFixed(1)}</Text>
+									<Text style={{flex: columnWidths[5], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.maxRunTime.toFixed(1)}</Text>
+									<Text style={{flex: columnWidths[6], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.callCount}</Text>
+									<Text style={{flex: columnWidths[7], minWidth: 0, justifyContent: "end"}}>{meta.callPlansStored}</Text>
 								</Row>
 							);
 						})}
@@ -78,11 +80,12 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 					<Row style={{paddingRight: vScrollBar_width}}>
 						<Text style={{flex: columnWidths2[0]}}>Index</Text>
 						<Text style={{flex: columnWidths2[1]}}>Call args</Text>
-						<Text style={{flex: columnWidths2[2], justifyContent: "end", fontSize: 11}}>Run-time</Text>
-						<Text style={{flex: columnWidths2[3], justifyContent: "end"}}>1st RT</Text>
-						<Text style={{flex: columnWidths2[4], justifyContent: "end"}}>Min RT</Text>
-						<Text style={{flex: columnWidths2[5], justifyContent: "end"}}>Max RT</Text>
-						<Text style={{flex: columnWidths2[6], justifyContent: "end"}}>Calls</Text>
+						<Text style={{flex: columnWidths2[2], justifyContent: "end", fontSize: 11}}>Run-time:</Text>
+						<Text style={{flex: columnWidths2[3], justifyContent: "end"}}>Avg</Text>
+						<Text style={{flex: columnWidths2[4], justifyContent: "end"}}>1st</Text>
+						<Text style={{flex: columnWidths2[5], justifyContent: "end"}}>Min</Text>
+						<Text style={{flex: columnWidths2[6], justifyContent: "end"}}>Max</Text>
+						<Text style={{flex: columnWidths2[7], justifyContent: "end"}}>Calls</Text>
 					</Row>
 					<div style={{overflowY: "scroll"}}>
 						{(GetSelectedAccessorMeta()?.callPlanMetas ?? [])
@@ -99,10 +102,11 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 									<Text style={{flex: columnWidths2[0], minWidth: 0}}>#{meta.index}</Text>
 									<Text style={{flex: columnWidths2[1], minWidth: 0, overflowWrap: "anywhere"}}>{meta.argsStr}</Text>
 									<Text style={{flex: columnWidths2[2], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.totalRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths2[3], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.firstRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths2[4], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.minRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths2[5], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.maxRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths2[6], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.callCount}</Text>
+									<Text style={{flex: columnWidths2[3], minWidth: 0, justifyContent: "end"}}>{(meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)}</Text>
+									<Text style={{flex: columnWidths2[4], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.firstRunTime.toFixed(1)}</Text>
+									<Text style={{flex: columnWidths2[5], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.minRunTime.toFixed(1)}</Text>
+									<Text style={{flex: columnWidths2[6], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.maxRunTime.toFixed(1)}</Text>
+									<Text style={{flex: columnWidths2[7], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.callCount}</Text>
 								</Row>
 							);
 						})}

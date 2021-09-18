@@ -49850,8 +49850,8 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-const columnWidths = [1, "0 50px", "0 50px", "0 50px", "0 50px", "0 50px", "0 50px"];
-const columnWidths2 = ["0 50px", 1, "0 50px", "0 50px", "0 50px", "0 50px", "0 50px"];
+const columnWidths = [1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px", "0 50px"];
+const columnWidths2 = ["0 50px", 1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px"];
 function RefreshAccessorMetas() {
     chrome.devtools.inspectedWindow.eval("globalThis.mglDevTools_hook.GetAccessorMetadatas()", (result, exceptionInfo) => {
         (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.Assert)(Array.isArray(result), `Got invalid result:${result}`);
@@ -49874,23 +49874,25 @@ let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.TextInput, { ml: 5, instant: true, value: Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter, onChange: val => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter = val })),
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { style: { paddingRight: _Shared_General__WEBPACK_IMPORTED_MODULE_1__.vScrollBar_width } },
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[0] } }, "Name"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[1], justifyContent: "end", fontSize: 11 } }, "Run-time"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[2], justifyContent: "end" } }, "1st RT"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[3], justifyContent: "end" } }, "Min RT"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[4], justifyContent: "end" } }, "Max RT"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[5], justifyContent: "end" } }, "Calls"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[6], justifyContent: "end", fontSize: 11 } }, "Call plans")),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[1], justifyContent: "end", fontSize: 11 } }, "Run-time:"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[2], justifyContent: "end" } }, "Avg"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[3], justifyContent: "end" } }, "1st"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[4], justifyContent: "end" } }, "Min"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[5], justifyContent: "end" } }, "Max"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[6], justifyContent: "end" } }, "Calls"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[7], justifyContent: "end", fontSize: 11 } }, "Call plans")),
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { style: { overflowY: "scroll" } }, Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas.filter(meta => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter == "" || JSON.stringify(meta).includes(Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter))
                     .map((meta, index) => {
                     const selected = Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index == index;
                     return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index = index },
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[0], minWidth: 0, overflowWrap: "anywhere" } }, meta.name),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[1], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.totalRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[2], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.firstRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[3], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.minRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[4], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.maxRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[5], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.callCount),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[6], minWidth: 0, justifyContent: "end" } }, meta.callPlansStored)));
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[2], minWidth: 0, justifyContent: "end" } }, (meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[3], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.firstRunTime.toFixed(1)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[4], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.minRunTime.toFixed(1)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[5], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.maxRunTime.toFixed(1)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[6], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.callCount),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[7], minWidth: 0, justifyContent: "end" } }, meta.callPlansStored)));
                 }))),
             react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 40 } },
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
@@ -49904,11 +49906,12 @@ let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { style: { paddingRight: _Shared_General__WEBPACK_IMPORTED_MODULE_1__.vScrollBar_width } },
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[0] } }, "Index"),
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[1] } }, "Call args"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[2], justifyContent: "end", fontSize: 11 } }, "Run-time"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[3], justifyContent: "end" } }, "1st RT"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[4], justifyContent: "end" } }, "Min RT"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[5], justifyContent: "end" } }, "Max RT"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[6], justifyContent: "end" } }, "Calls")),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[2], justifyContent: "end", fontSize: 11 } }, "Run-time:"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[3], justifyContent: "end" } }, "Avg"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[4], justifyContent: "end" } }, "1st"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[5], justifyContent: "end" } }, "Min"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[6], justifyContent: "end" } }, "Max"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[7], justifyContent: "end" } }, "Calls")),
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { style: { overflowY: "scroll" } }, ((_c = (_b = (0,Panel_Store__WEBPACK_IMPORTED_MODULE_3__.GetSelectedAccessorMeta)()) === null || _b === void 0 ? void 0 : _b.callPlanMetas) !== null && _c !== void 0 ? _c : [])
                     .filter(meta => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.callPlans_filter == "" || JSON.stringify(meta).includes(Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.callPlans_filter))
                     .map((meta, index) => {
@@ -49919,10 +49922,11 @@ let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_
                             meta.index),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[1], minWidth: 0, overflowWrap: "anywhere" } }, meta.argsStr),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[2], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.totalRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[3], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.firstRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[4], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.minRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[5], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.maxRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[6], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.callCount)));
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[3], minWidth: 0, justifyContent: "end" } }, (meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[4], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.firstRunTime.toFixed(1)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[5], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.minRunTime.toFixed(1)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[6], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.maxRunTime.toFixed(1)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[7], minWidth: 0, justifyContent: "end" } }, meta.profilingInfo.callCount)));
                 }))),
             react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 35 } },
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
