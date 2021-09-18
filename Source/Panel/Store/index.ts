@@ -3,18 +3,21 @@ import {makeObservable, observable} from "mobx";
 
 export class AccessorMeta {
 	name: string;
-	totalRunTime: number;
-	callCount: number;
+	profilingInfo = new ProfilingInfo();
 	callPlanMetas: CallPlanMeta[];
 	callPlansStored: number;
 }
 export class CallPlanMeta {
 	index: number;
 	argsStr: string;
-
-	// profiling data
+	profilingInfo = new ProfilingInfo();
+}
+export class ProfilingInfo {
 	callCount = 0;
 	totalRunTime = 0;
+	firstRunTime = 0;
+	minRunTime = 0;
+	maxRunTime = 0;
 }
 
 export class RootState {
@@ -23,6 +26,9 @@ export class RootState {
 	@O accessorMetas = [] as AccessorMeta[];
 	@O selectedAccessorMeta_index: number;
 	@O selectedCallPlan_index: number;
+
+	@O accessors_filter = "";
+	@O callPlans_filter = "";
 }
 
 export function GetSelectedAccessorMeta() {
