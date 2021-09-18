@@ -26,6 +26,22 @@ declare const chrome;
 export class AccessorsUI extends BaseComponent<{}, {}> {
 	render() {
 		let {} = this.props;
+		
+		const cellStyle = (index: number, opts?: {textToRight?: boolean}, extraStyles?: any)=>{
+			return E(...[
+				{flex: columnWidths[index], minWidth: 0},
+				extraStyles,
+				opts?.textToRight != false && {justifyContent: "end"},
+			].filter(a=>a));
+		};
+		const cellStyle2 = (index: number, opts?: {textToRight?: boolean}, extraStyles?: any)=>{
+			return E(...[
+				{flex: columnWidths2[index], minWidth: 0},
+				extraStyles,
+				opts?.textToRight != false && {justifyContent: "end"},
+			].filter(a=>a));
+		};
+
 		return (
 			<Row style={{height: "100%"}}>
 				<Column style={{flex: 25}}>
@@ -36,14 +52,14 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 						<TextInput ml={5} instant={true} value={store.accessors_filter} onChange={val=>store.accessors_filter = val}/>
 					</Row>
 					<Row style={{paddingRight: vScrollBar_width}}>
-						<Text style={{flex: columnWidths[0]}}>Name</Text>
-						<Text style={{flex: columnWidths[1], justifyContent: "end", fontSize: 11}}>Run-time:</Text>
-						<Text style={{flex: columnWidths[2], justifyContent: "end"}}>Avg</Text>
-						<Text style={{flex: columnWidths[3], justifyContent: "end"}}>1st</Text>
-						<Text style={{flex: columnWidths[4], justifyContent: "end"}}>Min</Text>
-						<Text style={{flex: columnWidths[5], justifyContent: "end"}}>Max</Text>
-						<Text style={{flex: columnWidths[6], justifyContent: "end"}}>Calls</Text>
-						<Text style={{flex: columnWidths[7], justifyContent: "end", fontSize: 11}}>Call plans</Text>
+						<Text style={cellStyle(0, {textToRight: false})}>Name</Text>
+						<Text style={cellStyle(1, {}, {fontSize: 11})}>Run-time:</Text>
+						<Text style={cellStyle(2)}>Avg</Text>
+						<Text style={cellStyle(3)}>1st</Text>
+						<Text style={cellStyle(4)}>Min</Text>
+						<Text style={cellStyle(5)}>Max</Text>
+						<Text style={cellStyle(6)}>Calls</Text>
+						<Text style={cellStyle(7, {}, {fontSize: 11})}>Call plans</Text>
 					</Row>
 					<div style={{overflowY: "scroll"}}>
 						{store.accessorMetas
@@ -57,14 +73,14 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 											selected && {background: HSLA(0, 0, .5, .5)}
 										)}
 										onClick={()=>store.selectedAccessorMeta_index = index}>
-									<Text style={{flex: columnWidths[0], minWidth: 0, overflowWrap: "anywhere"}}>{meta.name}</Text>
-									<Text style={{flex: columnWidths[1], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.totalRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths[2], minWidth: 0, justifyContent: "end"}}>{(meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)}</Text>
-									<Text style={{flex: columnWidths[3], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.firstRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths[4], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.minRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths[5], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.maxRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths[6], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.callCount}</Text>
-									<Text style={{flex: columnWidths[7], minWidth: 0, justifyContent: "end"}}>{meta.callPlansStored}</Text>
+									<Text style={cellStyle(0, {textToRight: false}, {overflowWrap: "anywhere"})}>{meta.name}</Text>
+									<Text style={cellStyle(1)}>{meta.profilingInfo.totalRunTime.toFixed(1)}</Text>
+									<Text style={cellStyle(2)}>{(meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)}</Text>
+									<Text style={cellStyle(3)}>{meta.profilingInfo.firstRunTime.toFixed(1)}</Text>
+									<Text style={cellStyle(4)}>{meta.profilingInfo.minRunTime.toFixed(1)}</Text>
+									<Text style={cellStyle(5)}>{meta.profilingInfo.maxRunTime.toFixed(1)}</Text>
+									<Text style={cellStyle(6)}>{meta.profilingInfo.callCount}</Text>
+									<Text style={cellStyle(7)}>{meta.callPlansStored}</Text>
 								</Row>
 							);
 						})}
@@ -78,14 +94,14 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 						<TextInput ml={5} instant={true} value={store.callPlans_filter} onChange={val=>store.callPlans_filter = val}/>
 					</Row>
 					<Row style={{paddingRight: vScrollBar_width}}>
-						<Text style={{flex: columnWidths2[0]}}>Index</Text>
-						<Text style={{flex: columnWidths2[1]}}>Call args</Text>
-						<Text style={{flex: columnWidths2[2], justifyContent: "end", fontSize: 11}}>Run-time:</Text>
-						<Text style={{flex: columnWidths2[3], justifyContent: "end"}}>Avg</Text>
-						<Text style={{flex: columnWidths2[4], justifyContent: "end"}}>1st</Text>
-						<Text style={{flex: columnWidths2[5], justifyContent: "end"}}>Min</Text>
-						<Text style={{flex: columnWidths2[6], justifyContent: "end"}}>Max</Text>
-						<Text style={{flex: columnWidths2[7], justifyContent: "end"}}>Calls</Text>
+						<Text style={cellStyle2(0, {textToRight: false})}>Index</Text>
+						<Text style={cellStyle2(1, {textToRight: false})}>Call args</Text>
+						<Text style={cellStyle2(2, {}, {fontSize: 11})}>Run-time:</Text>
+						<Text style={cellStyle2(3)}>Avg</Text>
+						<Text style={cellStyle2(4)}>1st</Text>
+						<Text style={cellStyle2(5)}>Min</Text>
+						<Text style={cellStyle2(6)}>Max</Text>
+						<Text style={cellStyle2(7)}>Calls</Text>
 					</Row>
 					<div style={{overflowY: "scroll"}}>
 						{(GetSelectedAccessorMeta()?.callPlanMetas ?? [])
@@ -99,14 +115,14 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 											selected && {background: HSLA(0, 0, .5, .5)}
 										)}
 										onClick={()=>store.selectedCallPlan_index = index}>
-									<Text style={{flex: columnWidths2[0], minWidth: 0}}>#{meta.index}</Text>
-									<Text style={{flex: columnWidths2[1], minWidth: 0, overflowWrap: "anywhere"}}>{meta.argsStr}</Text>
-									<Text style={{flex: columnWidths2[2], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.totalRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths2[3], minWidth: 0, justifyContent: "end"}}>{(meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)}</Text>
-									<Text style={{flex: columnWidths2[4], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.firstRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths2[5], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.minRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths2[6], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.maxRunTime.toFixed(1)}</Text>
-									<Text style={{flex: columnWidths2[7], minWidth: 0, justifyContent: "end"}}>{meta.profilingInfo.callCount}</Text>
+									<Text style={cellStyle2(0, {textToRight: false})}>#{meta.index}</Text>
+									<Text style={cellStyle2(1, {textToRight: false}, {overflowWrap: "anywhere"})}>{meta.argsStr}</Text>
+									<Text style={cellStyle2(2)}>{meta.profilingInfo.totalRunTime.toFixed(1)}</Text>
+									<Text style={cellStyle2(3)}>{(meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)}</Text>
+									<Text style={cellStyle2(4)}>{meta.profilingInfo.firstRunTime.toFixed(1)}</Text>
+									<Text style={cellStyle2(5)}>{meta.profilingInfo.minRunTime.toFixed(1)}</Text>
+									<Text style={cellStyle2(6)}>{meta.profilingInfo.maxRunTime.toFixed(1)}</Text>
+									<Text style={cellStyle2(7)}>{meta.profilingInfo.callCount}</Text>
 								</Row>
 							);
 						})}
