@@ -49850,8 +49850,8 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-const columnWidths = [1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px", "0 50px"];
-const columnWidths2 = ["0 50px", 1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px"];
+const columnWidths = [1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px", "0 50px", "0 50px"];
+const columnWidths2 = ["0 50px", 1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px", "0 50px"];
 function RefreshAccessorMetas() {
     chrome.devtools.inspectedWindow.eval("globalThis.mglDevTools_hook.GetAccessorMetadatas()", (result, exceptionInfo) => {
         (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.Assert)(Array.isArray(result), `Got invalid result:${result}`);
@@ -49893,20 +49893,22 @@ let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(3) }, "1st"),
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(4) }, "Min"),
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(5) }, "Max"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(6) }, "Calls"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(7, {}, { fontSize: 11 }) }, "Call plans")),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(6) }, "Calls:"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(7) }, "NC"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(8, {}, { fontSize: 11 }) }, "Call plans")),
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { style: { overflowY: "scroll" } }, Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas.filter(meta => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter == "" || JSON.stringify(meta).includes(Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter))
                     .map((meta, index) => {
                     const selected = Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index == index;
                     return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index = index },
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(0, { textToRight: false }, { overflowWrap: "anywhere" }) }, meta.name),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(1) }, meta.profilingInfo.totalRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(2) }, (meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(2) }, (meta.profilingInfo.totalRunTime / meta.profilingInfo.calls).toFixed(1)),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(3) }, meta.profilingInfo.firstRunTime.toFixed(1)),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(4) }, meta.profilingInfo.minRunTime.toFixed(1)),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(5) }, meta.profilingInfo.maxRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(6) }, meta.profilingInfo.callCount),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(7) }, meta.callPlansStored)));
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(6) }, meta.profilingInfo.calls),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(7) }, meta.profilingInfo.calls - meta.profilingInfo.calls_cached),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(8) }, meta.callPlansStored)));
                 }))),
             react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 40 } },
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
@@ -49925,7 +49927,8 @@ let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(4) }, "1st"),
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(5) }, "Min"),
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(6) }, "Max"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(7) }, "Calls")),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(7) }, "Calls:"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(8) }, "NC")),
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { style: { overflowY: "scroll" } }, ((_c = (_b = (0,Panel_Store__WEBPACK_IMPORTED_MODULE_3__.GetSelectedAccessorMeta)()) === null || _b === void 0 ? void 0 : _b.callPlanMetas) !== null && _c !== void 0 ? _c : [])
                     .filter(meta => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.callPlans_filter == "" || JSON.stringify(meta).includes(Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.callPlans_filter))
                     .map((meta, index) => {
@@ -49936,11 +49939,12 @@ let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_
                             meta.index),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(1, { textToRight: false }, { overflowWrap: "anywhere" }) }, meta.argsStr),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(2) }, meta.profilingInfo.totalRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(3) }, (meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(3) }, (meta.profilingInfo.totalRunTime / meta.profilingInfo.calls).toFixed(1)),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(4) }, meta.profilingInfo.firstRunTime.toFixed(1)),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(5) }, meta.profilingInfo.minRunTime.toFixed(1)),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(6) }, meta.profilingInfo.maxRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(7) }, meta.profilingInfo.callCount)));
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(7) }, meta.profilingInfo.calls),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(8) }, meta.profilingInfo.calls - meta.profilingInfo.calls_cached)));
                 }))),
             react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 35 } },
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
@@ -50089,7 +50093,13 @@ class CallPlanMeta {
 }
 class ProfilingInfo {
     constructor() {
-        Object.defineProperty(this, "callCount", {
+        Object.defineProperty(this, "calls", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "calls_cached", {
             enumerable: true,
             configurable: true,
             writable: true,

@@ -13,7 +13,8 @@ export class CallPlanMeta {
 	profilingInfo = new ProfilingInfo();
 }
 export class ProfilingInfo {
-	callCount = 0;
+	calls = 0;
+	calls_cached = 0;
 	totalRunTime = 0;
 	firstRunTime = 0;
 	minRunTime = 0;

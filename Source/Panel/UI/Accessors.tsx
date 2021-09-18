@@ -8,8 +8,8 @@ import React, {useState} from "react";
 import {Button, Column, Row, Text, TextInput} from "react-vcomponents";
 import {BaseComponent} from "react-vextensions";
 
-const columnWidths = [1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px", "0 50px"];
-const columnWidths2 = ["0 50px", 1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px"];
+const columnWidths = [1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px", "0 50px", "0 50px"];
+const columnWidths2 = ["0 50px", 1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px", "0 50px"];
 
 function RefreshAccessorMetas() {
 	chrome.devtools.inspectedWindow.eval("globalThis.mglDevTools_hook.GetAccessorMetadatas()", (result, exceptionInfo)=>{
@@ -26,7 +26,7 @@ declare const chrome;
 export class AccessorsUI extends BaseComponent<{}, {}> {
 	render() {
 		let {} = this.props;
-		
+
 		const cellStyle = (index: number, opts?: {textToRight?: boolean}, extraStyles?: any)=>{
 			return E(...[
 				{flex: columnWidths[index], minWidth: 0},
@@ -58,8 +58,9 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 						<Text style={cellStyle(3)}>1st</Text>
 						<Text style={cellStyle(4)}>Min</Text>
 						<Text style={cellStyle(5)}>Max</Text>
-						<Text style={cellStyle(6)}>Calls</Text>
-						<Text style={cellStyle(7, {}, {fontSize: 11})}>Call plans</Text>
+						<Text style={cellStyle(6)}>Calls:</Text>
+						<Text style={cellStyle(7)}>NC</Text>
+						<Text style={cellStyle(8, {}, {fontSize: 11})}>Call plans</Text>
 					</Row>
 					<div style={{overflowY: "scroll"}}>
 						{store.accessorMetas
@@ -75,12 +76,13 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 										onClick={()=>store.selectedAccessorMeta_index = index}>
 									<Text style={cellStyle(0, {textToRight: false}, {overflowWrap: "anywhere"})}>{meta.name}</Text>
 									<Text style={cellStyle(1)}>{meta.profilingInfo.totalRunTime.toFixed(1)}</Text>
-									<Text style={cellStyle(2)}>{(meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)}</Text>
+									<Text style={cellStyle(2)}>{(meta.profilingInfo.totalRunTime / meta.profilingInfo.calls).toFixed(1)}</Text>
 									<Text style={cellStyle(3)}>{meta.profilingInfo.firstRunTime.toFixed(1)}</Text>
 									<Text style={cellStyle(4)}>{meta.profilingInfo.minRunTime.toFixed(1)}</Text>
 									<Text style={cellStyle(5)}>{meta.profilingInfo.maxRunTime.toFixed(1)}</Text>
-									<Text style={cellStyle(6)}>{meta.profilingInfo.callCount}</Text>
-									<Text style={cellStyle(7)}>{meta.callPlansStored}</Text>
+									<Text style={cellStyle(6)}>{meta.profilingInfo.calls}</Text>
+									<Text style={cellStyle(7)}>{meta.profilingInfo.calls - meta.profilingInfo.calls_cached}</Text>
+									<Text style={cellStyle(8)}>{meta.callPlansStored}</Text>
 								</Row>
 							);
 						})}
@@ -101,7 +103,8 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 						<Text style={cellStyle2(4)}>1st</Text>
 						<Text style={cellStyle2(5)}>Min</Text>
 						<Text style={cellStyle2(6)}>Max</Text>
-						<Text style={cellStyle2(7)}>Calls</Text>
+						<Text style={cellStyle2(7)}>Calls:</Text>
+						<Text style={cellStyle2(8)}>NC</Text>
 					</Row>
 					<div style={{overflowY: "scroll"}}>
 						{(GetSelectedAccessorMeta()?.callPlanMetas ?? [])
@@ -118,11 +121,12 @@ export class AccessorsUI extends BaseComponent<{}, {}> {
 									<Text style={cellStyle2(0, {textToRight: false})}>#{meta.index}</Text>
 									<Text style={cellStyle2(1, {textToRight: false}, {overflowWrap: "anywhere"})}>{meta.argsStr}</Text>
 									<Text style={cellStyle2(2)}>{meta.profilingInfo.totalRunTime.toFixed(1)}</Text>
-									<Text style={cellStyle2(3)}>{(meta.profilingInfo.totalRunTime / meta.profilingInfo.callCount).toFixed(1)}</Text>
+									<Text style={cellStyle2(3)}>{(meta.profilingInfo.totalRunTime / meta.profilingInfo.calls).toFixed(1)}</Text>
 									<Text style={cellStyle2(4)}>{meta.profilingInfo.firstRunTime.toFixed(1)}</Text>
 									<Text style={cellStyle2(5)}>{meta.profilingInfo.minRunTime.toFixed(1)}</Text>
 									<Text style={cellStyle2(6)}>{meta.profilingInfo.maxRunTime.toFixed(1)}</Text>
-									<Text style={cellStyle2(7)}>{meta.profilingInfo.callCount}</Text>
+									<Text style={cellStyle2(7)}>{meta.profilingInfo.calls}</Text>
+									<Text style={cellStyle2(8)}>{meta.profilingInfo.calls - meta.profilingInfo.calls_cached}</Text>
 								</Row>
 							);
 						})}
