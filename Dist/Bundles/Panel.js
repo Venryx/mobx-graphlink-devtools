@@ -49850,35 +49850,35 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-const columnWidths = [40, 20, 20, 20];
+const columnWidths = [55, 15, 15, 15];
+const columnWidths2 = [10, 70, 10, 10];
+function RefreshAccessorMetas() {
+    chrome.devtools.inspectedWindow.eval("globalThis.mglDevTools_hook.GetAccessorMetadatas()", (result, exceptionInfo) => {
+        (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.Assert)(Array.isArray(result), `Got invalid result:${result}`);
+        /*if (result.length) {
+            Assert(typeof result[0] == "string", `Invalid entry:${JSON.stringify(result[0])}`);
+        }*/
+        Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas = result;
+    });
+}
 let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_6__.BaseComponent {
     render() {
-        var _a;
+        var _a, _b, _c;
         let {} = this.props;
         return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { style: { height: "100%" } },
             react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 20 } },
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, null, "Accessors"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { text: "Refresh", onClick: () => {
-                            chrome.devtools.inspectedWindow.eval("globalThis.mglDevTools_hook.GetAccessorMetadatas()", (result, exceptionInfo) => {
-                                (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.Assert)(Array.isArray(result), `Got invalid result:${result}`);
-                                /*if (result.length) {
-                                    Assert(typeof result[0] == "string", `Invalid entry:${JSON.stringify(result[0])}`);
-                                }*/
-                                Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas = result;
-                            });
-                        } })),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { ml: 5, text: "Refresh", onClick: () => RefreshAccessorMetas() })),
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { style: { paddingRight: _Shared_General__WEBPACK_IMPORTED_MODULE_1__.vScrollBar_width } },
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[0] } }, "Name"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[1] } }, "Total run-time"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[1] } }, "Run-time"),
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[2] } }, "Call count"),
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[3] } }, "Call plans")),
-                react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { style: { overflow: "auto" } }, Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas.map((meta, index) => {
+                react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { style: { overflowY: "scroll" } }, Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas.map((meta, index) => {
                     const selected = Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index == index;
-                    return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => {
-                            Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index = index;
-                        } },
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[0], minWidth: 0 } }, meta.name),
+                    return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index = index },
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[0], minWidth: 0, overflowWrap: "anywhere" } }, meta.name),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[1], minWidth: 0 } }, (meta.totalRunTime / 1000).toFixed(3)),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[2], minWidth: 0 } }, meta.callCount),
                         react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths[3], minWidth: 0 } }, meta.callPlansStored)));
@@ -49889,13 +49889,26 @@ let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_
                         "Call plans (for: ", (_a = (0,Panel_Store__WEBPACK_IMPORTED_MODULE_3__.GetSelectedAccessorMeta)()) === null || _a === void 0 ? void 0 :
                         _a.name,
                         ")"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { text: "Refresh", onClick: () => {
-                        } }))),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { ml: 5, text: "Refresh", onClick: () => RefreshAccessorMetas() })),
+                react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { style: { paddingRight: _Shared_General__WEBPACK_IMPORTED_MODULE_1__.vScrollBar_width } },
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[0] } }, "Index"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[1] } }, "Call args"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[2] } }, "Run-time"),
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[3] } }, "Call count")),
+                react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { style: { overflowY: "scroll" } }, ((_c = (_b = (0,Panel_Store__WEBPACK_IMPORTED_MODULE_3__.GetSelectedAccessorMeta)()) === null || _b === void 0 ? void 0 : _b.callPlanMetas) !== null && _c !== void 0 ? _c : []).map((meta, index) => {
+                    const selected = Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedCallPlan_index == index;
+                    return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedCallPlan_index = index },
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[0], minWidth: 0 } },
+                            "#",
+                            meta.index),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[1], minWidth: 0, overflowWrap: "anywhere" } }, meta.argsStr),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[2], minWidth: 0 } }, (meta.totalRunTime / 1000).toFixed(3)),
+                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: { flex: columnWidths2[3], minWidth: 0 } }, meta.callCount)));
+                }))),
             react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 40 } },
                 react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
                     react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, null, "Call plan"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { text: "Refresh", onClick: () => {
-                        } })))));
+                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { ml: 5, text: "Refresh", onClick: () => RefreshAccessorMetas() })))));
     }
 };
 AccessorsUI = __decorate([
@@ -49970,8 +49983,10 @@ class ExtrasUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_2__.BaseCompon
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AccessorMeta": () => (/* binding */ AccessorMeta),
+/* harmony export */   "CallPlanMeta": () => (/* binding */ CallPlanMeta),
 /* harmony export */   "RootState": () => (/* binding */ RootState),
 /* harmony export */   "GetSelectedAccessorMeta": () => (/* binding */ GetSelectedAccessorMeta),
+/* harmony export */   "GetSelectedCallPlan": () => (/* binding */ GetSelectedCallPlan),
 /* harmony export */   "store": () => (/* binding */ store)
 /* harmony export */ });
 /* harmony import */ var _Shared_General__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(109);
@@ -50004,11 +50019,46 @@ class AccessorMeta {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "callPlanMetas", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         Object.defineProperty(this, "callPlansStored", {
             enumerable: true,
             configurable: true,
             writable: true,
             value: void 0
+        });
+    }
+}
+class CallPlanMeta {
+    constructor() {
+        Object.defineProperty(this, "index", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "argsStr", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        // profiling data
+        Object.defineProperty(this, "callCount", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "totalRunTime", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
         });
     }
 }
@@ -50026,6 +50076,12 @@ class RootState {
             writable: true,
             value: void 0
         });
+        Object.defineProperty(this, "selectedCallPlan_index", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         (0,mobx__WEBPACK_IMPORTED_MODULE_1__.makeObservable)(this);
     }
 }
@@ -50035,8 +50091,17 @@ __decorate([
 __decorate([
     _Shared_General__WEBPACK_IMPORTED_MODULE_0__.O
 ], RootState.prototype, "selectedAccessorMeta_index", void 0);
+__decorate([
+    _Shared_General__WEBPACK_IMPORTED_MODULE_0__.O
+], RootState.prototype, "selectedCallPlan_index", void 0);
 function GetSelectedAccessorMeta() {
     return store.accessorMetas[store.selectedAccessorMeta_index];
+}
+function GetSelectedCallPlan() {
+    const accessorMeta = GetSelectedAccessorMeta();
+    if (accessorMeta == null)
+        return null;
+    return accessorMeta.callPlanMetas[store.selectedCallPlan_index];
 }
 const store = new RootState();
 G({ store });
