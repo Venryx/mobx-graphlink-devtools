@@ -49828,56 +49828,68 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AccessorsUI": () => (/* binding */ AccessorsUI)
 /* harmony export */ });
-/* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(62);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var react_vcomponents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(30);
-/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18);
+/* harmony import */ var _Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(105);
+/* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(62);
+/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(85);
+/* harmony import */ var Panel_Store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(108);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2);
+/* harmony import */ var react_vcomponents__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(30);
+/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(18);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 
 
 
 
-class AccessorMeta {
-    constructor() {
-        Object.defineProperty(this, "name", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-    }
-}
-class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_3__.BaseComponent {
+
+
+
+let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_5__.BaseComponent {
     render() {
+        var _a;
         let {} = this.props;
-        let [accessorMetas, setAccessorMetas] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
-        return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, null,
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Column, { style: { flex: 33 } },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, null,
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Text, null, "Accessors"),
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Button, { text: "Refresh", onClick: () => {
+        return (react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Row, { style: { height: "100%" } },
+            react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Column, { style: { flex: 20 } },
+                react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Text, null, "Accessors"),
+                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Button, { text: "Refresh", onClick: () => {
                             chrome.devtools.inspectedWindow.eval("globalThis.mglDevTools_hook.GetAccessorMetadatas()", (result, exceptionInfo) => {
-                                (0,js_vextensions__WEBPACK_IMPORTED_MODULE_0__.Assert)(Array.isArray(result), `Got invalid result:${result}`);
+                                (0,js_vextensions__WEBPACK_IMPORTED_MODULE_1__.Assert)(Array.isArray(result), `Got invalid result:${result}`);
                                 /*if (result.length) {
                                     Assert(typeof result[0] == "string", `Invalid entry:${JSON.stringify(result[0])}`);
                                 }*/
-                                setAccessorMetas(result);
+                                Panel_Store__WEBPACK_IMPORTED_MODULE_2__.store.accessorMetas = result;
                             });
                         } })),
-                accessorMetas.map((meta, index) => {
-                    return (react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, { key: index }, meta.name));
-                })),
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Column, { style: { flex: 33 } },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, null,
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Text, null, "Call plans"),
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Button, { text: "Refresh", onClick: () => {
+                react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", { style: { overflow: "auto" } }, Panel_Store__WEBPACK_IMPORTED_MODULE_2__.store.accessorMetas.map((meta, index) => {
+                    const selected = Panel_Store__WEBPACK_IMPORTED_MODULE_2__.store.selectedAccessorMeta_index == index;
+                    return (react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_1__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => {
+                            Panel_Store__WEBPACK_IMPORTED_MODULE_2__.store.selectedAccessorMeta_index = index;
+                        } }, meta.name));
+                }))),
+            react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Column, { style: { flex: 40 } },
+                react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Text, null,
+                        "Call plans (for: ", (_a = (0,Panel_Store__WEBPACK_IMPORTED_MODULE_2__.GetSelectedAccessorMeta)()) === null || _a === void 0 ? void 0 :
+                        _a.name,
+                        ")"),
+                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Button, { text: "Refresh", onClick: () => {
                         } }))),
-            react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Column, { style: { flex: 34 } },
-                react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, null,
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Text, null, "Call plan"),
-                    react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Button, { text: "Refresh", onClick: () => {
+            react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Column, { style: { flex: 40 } },
+                react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Text, null, "Call plan"),
+                    react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_4__.Button, { text: "Refresh", onClick: () => {
                         } })))));
     }
-}
+};
+AccessorsUI = __decorate([
+    mobx_react__WEBPACK_IMPORTED_MODULE_6__.observer
+], AccessorsUI);
+
 
 
 /***/ }),
@@ -49936,6 +49948,82 @@ class ExtrasUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_2__.BaseCompon
                     } }))));
     }
 }
+
+
+/***/ }),
+/* 108 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AccessorMeta": () => (/* binding */ AccessorMeta),
+/* harmony export */   "RootState": () => (/* binding */ RootState),
+/* harmony export */   "GetSelectedAccessorMeta": () => (/* binding */ GetSelectedAccessorMeta),
+/* harmony export */   "store": () => (/* binding */ store)
+/* harmony export */ });
+/* harmony import */ var _Shared_General__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(109);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(88);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+class AccessorMeta {
+    constructor() {
+        Object.defineProperty(this, "name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+class RootState {
+    constructor() {
+        Object.defineProperty(this, "accessorMetas", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: []
+        });
+        Object.defineProperty(this, "selectedAccessorMeta_index", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        (0,mobx__WEBPACK_IMPORTED_MODULE_1__.makeObservable)(this);
+    }
+}
+__decorate([
+    _Shared_General__WEBPACK_IMPORTED_MODULE_0__.O
+], RootState.prototype, "accessorMetas", void 0);
+__decorate([
+    _Shared_General__WEBPACK_IMPORTED_MODULE_0__.O
+], RootState.prototype, "selectedAccessorMeta_index", void 0);
+function GetSelectedAccessorMeta() {
+    return store.accessorMetas[store.selectedAccessorMeta_index];
+}
+const store = new RootState();
+G({ store });
+
+
+/***/ }),
+/* 109 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "O": () => (/* binding */ O)
+/* harmony export */ });
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(88);
+
+const O = mobx__WEBPACK_IMPORTED_MODULE_0__.observable;
 
 
 /***/ })
