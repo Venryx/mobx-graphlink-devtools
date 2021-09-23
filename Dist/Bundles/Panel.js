@@ -28886,12 +28886,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_FromWVC__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(105);
 /* harmony import */ var _Accessors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(106);
 /* harmony import */ var _Extras__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(107);
+/* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(62);
+/* harmony import */ var Panel_Store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(108);
+/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(85);
+/* harmony import */ var Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(110);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
 
 
 
@@ -28909,13 +28917,19 @@ let RootUI = class RootUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_1__
                 //background: "black",
             } },
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, { style: { height: 36, padding: 5, background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_4__.HSLA)(0, 0, 0, .5) } },
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Select, { displayType: "button bar", options: tabs, value: tab, onChange: val => setTab(val) })),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Select, { displayType: "button bar", options: tabs, value: tab, onChange: val => setTab(val) }),
+                tab == "Accessors" &&
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Row, { ml: "auto" },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Text, null, "Profiling sub-metric:"),
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.Select, { ml: 5, options: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_7__.GetEntries)(Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_9__.ProfilingSubmetric).filter(a => a.name != "sum"), value: Panel_Store__WEBPACK_IMPORTED_MODULE_8__.store.profilingSubmetric, onChange: val => Panel_Store__WEBPACK_IMPORTED_MODULE_8__.store.profilingSubmetric = val }),
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_2__.CheckBox, { text: "Show detail panel", value: Panel_Store__WEBPACK_IMPORTED_MODULE_8__.store.showDetailPanel, onChange: val => Panel_Store__WEBPACK_IMPORTED_MODULE_8__.store.showDetailPanel = val }))),
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { style: { flex: 1, height: "calc(100% - 36px)" } },
                 tab == "Accessors" && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Accessors__WEBPACK_IMPORTED_MODULE_5__.AccessorsUI, null),
                 tab == "Extras" && react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Extras__WEBPACK_IMPORTED_MODULE_6__.ExtrasUI, null))));
     }
 };
 RootUI = __decorate([
+    mobx_react__WEBPACK_IMPORTED_MODULE_10__.observer,
     _Shared_MobX__WEBPACK_IMPORTED_MODULE_3__.ClassHooks
 ], RootUI);
 
@@ -37533,15 +37547,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_universal_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
-/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(85);
+/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(85);
 /* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(62);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(88);
 
 
 
 
 
+
+(0,mobx__WEBPACK_IMPORTED_MODULE_4__.configure)({
+    enforceActions: "never",
+});
 function observer_simple(target) {
-    return (0,mobx_react__WEBPACK_IMPORTED_MODULE_4__.observer)(target)["type"];
+    return (0,mobx_react__WEBPACK_IMPORTED_MODULE_5__.observer)(target)["type"];
 }
 // variant of @observer decorator, which also adds (and is compatible with) class-hooks (similar to mobx-graphlink's @MGLObserver, but with more options)
 class Observer_Options {
@@ -37575,7 +37594,7 @@ function Observer(...args) {
         } else {
             observer(targetClass as any);
         }*/
-        (0,mobx_react__WEBPACK_IMPORTED_MODULE_4__.observer)(targetClass);
+        (0,mobx_react__WEBPACK_IMPORTED_MODULE_5__.observer)(targetClass);
     }
 }
 function ClassHooks(targetClass) {
@@ -49831,11 +49850,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(105);
 /* harmony import */ var _Shared_General__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(109);
 /* harmony import */ var js_vextensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(62);
-/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(85);
+/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(85);
 /* harmony import */ var Panel_Store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(108);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2);
-/* harmony import */ var react_vcomponents__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(30);
-/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18);
+/* harmony import */ var Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(110);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2);
+/* harmony import */ var react_vcomponents__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(30);
+/* harmony import */ var react_vextensions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(18);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -49850,18 +49870,24 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-const columnWidths = [1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px", "0 50px", "0 50px"];
-const columnWidths2 = ["0 50px", 1, "0 50px", "0 30px", "0 30px", "0 30px", "0 30px", "0 50px", "0 50px"];
+
+const columnWidths = [1, "0 50px", "0 50px", "0 50px", "0 50px", "0 50px", "0 50px", "0 45px", "0 45px", "0 45px"];
+const columnWidths2 = ["0 40px", 1, "0 45px", "0 45px", "0 45px", "0 45px", "0 45px", "0 45px", "0 40px", "0 40px"];
 function RefreshAccessorMetas() {
     chrome.devtools.inspectedWindow.eval("globalThis.mglDevTools_hook.GetAccessorMetadatas()", (result, exceptionInfo) => {
         (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.Assert)(Array.isArray(result), `Got invalid result:${result}`);
         /*if (result.length) {
             Assert(typeof result[0] == "string", `Invalid entry:${JSON.stringify(result[0])}`);
         }*/
+        // sort the results (note: in-page function should already have sorted the result descendingly by runTime_sum+waitTime_sum)
+        result = (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.CE)(result).OrderByDescending(a => a.profilingInfo.runTime_sum + a.profilingInfo.waitTime_sum);
+        for (const meta of result) {
+            meta.callPlanMetas = (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.CE)(meta.callPlanMetas).OrderByDescending(a => a.profilingInfo.runTime_sum + a.profilingInfo.waitTime_sum);
+        }
         Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas = result;
     });
 }
-let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_6__.BaseComponent {
+let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_7__.BaseComponent {
     render() {
         var _a, _b, _c;
         let {} = this.props;
@@ -49879,81 +49905,120 @@ let AccessorsUI = class AccessorsUI extends react_vextensions__WEBPACK_IMPORTED_
                 (opts === null || opts === void 0 ? void 0 : opts.textToRight) != false && { justifyContent: "end" },
             ].filter(a => a));
         };
-        return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { style: { height: "100%" } },
-            react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 25 } },
-                react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, null, "Accessors"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { ml: 5, text: "Refresh", onClick: () => RefreshAccessorMetas() }),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { ml: 5 }, "Filter:"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.TextInput, { ml: 5, instant: true, value: Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter, onChange: val => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter = val })),
-                react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { style: { paddingRight: _Shared_General__WEBPACK_IMPORTED_MODULE_1__.vScrollBar_width } },
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(0, { textToRight: false }) }, "Name"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(1, {}, { fontSize: 11 }) }, "Run-time:"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(2) }, "Avg"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(3) }, "1st"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(4) }, "Min"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(5) }, "Max"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(6) }, "Calls:"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(7) }, "NC"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(8, {}, { fontSize: 11 }) }, "Call plans")),
-                react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { style: { overflowY: "scroll" } }, Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas.filter(meta => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter == "" || JSON.stringify(meta).includes(Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter))
+        return (react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Row, { style: { height: "100%", columnGap: 7 } },
+            react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Column, { style: { flex: 27.5 } },
+                react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, null, "Accessors"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Row, { ml: "auto" },
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, null, "Filter:"),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.TextInput, { ml: 5, instant: true, value: Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter, onChange: val => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter = val }),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Button, { ml: 5, text: "Refresh", onClick: () => RefreshAccessorMetas() }),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Button, { ml: 5, text: "Info", onClick: () => {
+                                alert((0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.CE)(`
+									Notes:
+									* Yellow background means the custom-accessor made a direct/raw database query/access.
+								`).AsMultiline(0));
+                            } }))),
+                react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Row, { style: { paddingRight: _Shared_General__WEBPACK_IMPORTED_MODULE_1__.vScrollBar_width } },
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(0, { textToRight: false }) }, "Name"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(1, {}, { fontSize: 11 }) }, "Run+wait"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(2, {}, { fontSize: 10 }) },
+                        "(",
+                        Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric,
+                        ")"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(3) }, "Run"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(4, {}, { fontSize: 10 }) },
+                        "(",
+                        Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric,
+                        ")"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(5) }, "Wait"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(6, {}, { fontSize: 10 }) },
+                        "(",
+                        Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric,
+                        ")"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(7) }, "Calls"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(8, {}, { fontSize: 9 }) }, "(no-cache)"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(9, {}, { fontSize: 10 }) }, "Call plans")),
+                react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", { style: { overflowY: "scroll" } }, Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessorMetas.filter(meta => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter == "" || JSON.stringify(meta).includes(Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.accessors_filter))
                     .map((meta, index) => {
                     const selected = Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index == index;
-                    return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index = index },
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(0, { textToRight: false }, { overflowWrap: "anywhere" }) }, meta.name),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(1) }, meta.profilingInfo.totalRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(2) }, (meta.profilingInfo.totalRunTime / meta.profilingInfo.calls).toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(3) }, meta.profilingInfo.firstRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(4) }, meta.profilingInfo.minRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(5) }, meta.profilingInfo.maxRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(6) }, meta.profilingInfo.calls),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(7) }, meta.profilingInfo.calls - meta.profilingInfo.calls_cached),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle(8) }, meta.callPlansStored)));
+                    const dbAccessStyle = meta.madeRawDBAccess ? { background: "rgba(200,200,0,.5)" } : {};
+                    return (react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedAccessorMeta_index = index },
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(0, { textToRight: false }, { overflowWrap: "anywhere" }) }, meta.name),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(1, {}, dbAccessStyle) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "runTime+waitTime", "sum")),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(2, {}, dbAccessStyle) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "runTime+waitTime", Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric)),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(3) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "runTime", "sum")),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(4) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "runTime", Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric)),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(5, {}, dbAccessStyle) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "waitTime", "sum")),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(6, {}, dbAccessStyle) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "waitTime", Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric)),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(7) }, meta.profilingInfo.calls),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(8) }, meta.profilingInfo.calls - meta.profilingInfo.calls_cached),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle(9) }, meta.callPlansStored)));
                 }))),
-            react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 40 } },
-                react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, null,
+            react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Column, { style: { flex: 37.5 } },
+                react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Row, null,
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, null,
                         "Call plans (for: ", (_a = (0,Panel_Store__WEBPACK_IMPORTED_MODULE_3__.GetSelectedAccessorMeta)()) === null || _a === void 0 ? void 0 :
                         _a.name,
                         ")"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { ml: 5, text: "Refresh", onClick: () => RefreshAccessorMetas() }),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { ml: 5 }, "Filter:"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.TextInput, { ml: 5, instant: true, value: Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.callPlans_filter, onChange: val => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.callPlans_filter = val })),
-                react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { style: { paddingRight: _Shared_General__WEBPACK_IMPORTED_MODULE_1__.vScrollBar_width } },
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(0, { textToRight: false }) }, "Index"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(1, { textToRight: false }) }, "Call args"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(2, {}, { fontSize: 11 }) }, "Run-time:"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(3) }, "Avg"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(4) }, "1st"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(5) }, "Min"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(6) }, "Max"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(7) }, "Calls:"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(8) }, "NC")),
-                react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { style: { overflowY: "scroll" } }, ((_c = (_b = (0,Panel_Store__WEBPACK_IMPORTED_MODULE_3__.GetSelectedAccessorMeta)()) === null || _b === void 0 ? void 0 : _b.callPlanMetas) !== null && _c !== void 0 ? _c : [])
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Row, { ml: "auto" },
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, null, "Filter:"),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.TextInput, { ml: 5, instant: true, value: Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.callPlans_filter, onChange: val => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.callPlans_filter = val }),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Button, { ml: 5, text: "Refresh", onClick: () => RefreshAccessorMetas() }),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Button, { ml: 5, text: "Info", onClick: () => {
+                                alert((0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.CE)(`
+									Notes:
+									* Yellow background means the custom-accessor made a direct/raw database query/access.
+								`).AsMultiline(0));
+                            } }))),
+                react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Row, { style: { paddingRight: _Shared_General__WEBPACK_IMPORTED_MODULE_1__.vScrollBar_width } },
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(0, { textToRight: false }) }, "Index"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(1, { textToRight: false }) }, "Call args"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(2, {}, { fontSize: 11 }) }, "Run+wait"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(3, {}, { fontSize: 10 }) },
+                        "(",
+                        Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric,
+                        ")"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(4) }, "Run"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(5, {}, { fontSize: 10 }) },
+                        "(",
+                        Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric,
+                        ")"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(6) }, "Wait"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(7, {}, { fontSize: 10 }) },
+                        "(",
+                        Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric,
+                        ")"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(8) }, "Calls"),
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(9, {}, { fontSize: 8 }) }, "(no-cache)")),
+                react__WEBPACK_IMPORTED_MODULE_5__.createElement("div", { style: { overflowY: "scroll" } }, ((_c = (_b = (0,Panel_Store__WEBPACK_IMPORTED_MODULE_3__.GetSelectedAccessorMeta)()) === null || _b === void 0 ? void 0 : _b.callPlanMetas) !== null && _c !== void 0 ? _c : [])
                     .filter(meta => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.callPlans_filter == "" || JSON.stringify(meta).includes(Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.callPlans_filter))
                     .map((meta, index) => {
                     const selected = Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedCallPlan_index == index;
-                    return (react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedCallPlan_index = index },
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(0, { textToRight: false }) },
+                    const dbAccessStyle = meta.madeRawDBAccess ? { background: "rgba(200,200,0,.5)" } : {};
+                    return (react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Row, { key: index, style: (0,js_vextensions__WEBPACK_IMPORTED_MODULE_2__.E)({ cursor: "pointer" }, selected && { background: (0,_Shared_FromWVC__WEBPACK_IMPORTED_MODULE_0__.HSLA)(0, 0, .5, .5) }), onClick: () => Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.selectedCallPlan_index = index },
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(0, { textToRight: false }) },
                             "#",
                             meta.index),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(1, { textToRight: false }, { overflowWrap: "anywhere" }) }, meta.argsStr),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(2) }, meta.profilingInfo.totalRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(3) }, (meta.profilingInfo.totalRunTime / meta.profilingInfo.calls).toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(4) }, meta.profilingInfo.firstRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(5) }, meta.profilingInfo.minRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(6) }, meta.profilingInfo.maxRunTime.toFixed(1)),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(7) }, meta.profilingInfo.calls),
-                        react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, { style: cellStyle2(8) }, meta.profilingInfo.calls - meta.profilingInfo.calls_cached)));
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(1, { textToRight: false }, { overflowWrap: "anywhere" }) }, meta.argsStr),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(2, {}, dbAccessStyle) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "runTime+waitTime", "sum")),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(3, {}, dbAccessStyle) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "runTime+waitTime", Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric)),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(4) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "runTime", "sum")),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(5) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "runTime", Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric)),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(6, {}, dbAccessStyle) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "waitTime", "sum")),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(7, {}, dbAccessStyle) }, (0,Panel_Store_AccessorMeta__WEBPACK_IMPORTED_MODULE_4__.GetMetricStr)(meta.profilingInfo, "waitTime", Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.profilingSubmetric)),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(8) }, meta.profilingInfo.calls),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, { style: cellStyle2(9) }, meta.profilingInfo.calls - meta.profilingInfo.calls_cached)));
                 }))),
-            react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Column, { style: { flex: 35 } },
-                react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Row, null,
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Text, null, "Call plan"),
-                    react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_5__.Button, { ml: 5, text: "Refresh", onClick: () => RefreshAccessorMetas() })))));
+            Panel_Store__WEBPACK_IMPORTED_MODULE_3__.store.showDetailPanel &&
+                react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Column, { style: { flex: 35 } },
+                    react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Row, null,
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Text, null, "Call plan"),
+                        react__WEBPACK_IMPORTED_MODULE_5__.createElement(react_vcomponents__WEBPACK_IMPORTED_MODULE_6__.Button, { ml: 5, text: "Refresh", onClick: () => RefreshAccessorMetas() })))));
     }
 };
 AccessorsUI = __decorate([
-    mobx_react__WEBPACK_IMPORTED_MODULE_7__.observer
+    mobx_react__WEBPACK_IMPORTED_MODULE_8__.observer
 ], AccessorsUI);
 
 
@@ -50023,16 +50088,14 @@ class ExtrasUI extends react_vextensions__WEBPACK_IMPORTED_MODULE_2__.BaseCompon
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AccessorMeta": () => (/* binding */ AccessorMeta),
-/* harmony export */   "CallPlanMeta": () => (/* binding */ CallPlanMeta),
-/* harmony export */   "ProfilingInfo": () => (/* binding */ ProfilingInfo),
 /* harmony export */   "RootState": () => (/* binding */ RootState),
 /* harmony export */   "GetSelectedAccessorMeta": () => (/* binding */ GetSelectedAccessorMeta),
 /* harmony export */   "GetSelectedCallPlan": () => (/* binding */ GetSelectedCallPlan),
 /* harmony export */   "store": () => (/* binding */ store)
 /* harmony export */ });
 /* harmony import */ var _Shared_General__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(109);
-/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(88);
+/* harmony import */ var mobx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(88);
+/* harmony import */ var _AccessorMeta__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(110);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -50041,98 +50104,21 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 };
 
 
-class AccessorMeta {
-    constructor() {
-        Object.defineProperty(this, "name", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(this, "profilingInfo", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: new ProfilingInfo()
-        });
-        Object.defineProperty(this, "callPlanMetas", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(this, "callPlansStored", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-    }
-}
-class CallPlanMeta {
-    constructor() {
-        Object.defineProperty(this, "index", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(this, "argsStr", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: void 0
-        });
-        Object.defineProperty(this, "profilingInfo", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: new ProfilingInfo()
-        });
-    }
-}
-class ProfilingInfo {
-    constructor() {
-        Object.defineProperty(this, "calls", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(this, "calls_cached", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(this, "totalRunTime", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(this, "firstRunTime", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(this, "minRunTime", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-        Object.defineProperty(this, "maxRunTime", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 0
-        });
-    }
-}
+
 class RootState {
     constructor() {
+        Object.defineProperty(this, "profilingSubmetric", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: _AccessorMeta__WEBPACK_IMPORTED_MODULE_1__.ProfilingSubmetric.max
+        });
+        Object.defineProperty(this, "showDetailPanel", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: false
+        }); // temporarily false
         Object.defineProperty(this, "accessorMetas", {
             enumerable: true,
             configurable: true,
@@ -50163,9 +50149,15 @@ class RootState {
             writable: true,
             value: ""
         });
-        (0,mobx__WEBPACK_IMPORTED_MODULE_1__.makeObservable)(this);
+        (0,mobx__WEBPACK_IMPORTED_MODULE_2__.makeObservable)(this);
     }
 }
+__decorate([
+    _Shared_General__WEBPACK_IMPORTED_MODULE_0__.O
+], RootState.prototype, "profilingSubmetric", void 0);
+__decorate([
+    _Shared_General__WEBPACK_IMPORTED_MODULE_0__.O
+], RootState.prototype, "showDetailPanel", void 0);
 __decorate([
     _Shared_General__WEBPACK_IMPORTED_MODULE_0__.O
 ], RootState.prototype, "accessorMetas", void 0);
@@ -50208,6 +50200,186 @@ __webpack_require__.r(__webpack_exports__);
 
 const O = mobx__WEBPACK_IMPORTED_MODULE_0__.observable;
 const vScrollBar_width = 17;
+
+
+/***/ }),
+/* 110 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AccessorMeta": () => (/* binding */ AccessorMeta),
+/* harmony export */   "CallPlanMeta": () => (/* binding */ CallPlanMeta),
+/* harmony export */   "ProfilingInfo": () => (/* binding */ ProfilingInfo),
+/* harmony export */   "ProfilingSubmetric": () => (/* binding */ ProfilingSubmetric),
+/* harmony export */   "GetMetricStr": () => (/* binding */ GetMetricStr),
+/* harmony export */   "GetMetric": () => (/* binding */ GetMetric)
+/* harmony export */ });
+class AccessorMeta {
+    constructor() {
+        Object.defineProperty(this, "name", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "profilingInfo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new ProfilingInfo()
+        });
+        Object.defineProperty(this, "madeRawDBAccess", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: false
+        });
+        Object.defineProperty(this, "callPlanMetas", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "callPlansStored", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+class CallPlanMeta {
+    constructor() {
+        Object.defineProperty(this, "index", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "argsStr", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "profilingInfo", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new ProfilingInfo()
+        });
+        Object.defineProperty(this, "madeRawDBAccess", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: false
+        });
+    }
+}
+class ProfilingInfo {
+    constructor() {
+        Object.defineProperty(this, "calls", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "calls_cached", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "calls_waited", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "runTime_sum", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "runTime_first", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "runTime_min", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "runTime_max", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "waitTime_sum", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "waitTime_first", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "waitTime_min", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "waitTime_max", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "currentWaitTime_startedAt", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+}
+var ProfilingSubmetric;
+(function (ProfilingSubmetric) {
+    ProfilingSubmetric["sum"] = "sum";
+    ProfilingSubmetric["1st"] = "1st";
+    ProfilingSubmetric["min"] = "min";
+    ProfilingSubmetric["max"] = "max";
+    ProfilingSubmetric["avg"] = "avg";
+})(ProfilingSubmetric || (ProfilingSubmetric = {}));
+function GetMetricStr(profilingInfo, metricType, submetric, decimals = 1) {
+    return GetMetric(profilingInfo, metricType, submetric).toFixed(decimals);
+}
+function GetMetric(profilingInfo, metricType, submetric) {
+    const p = profilingInfo, r = metricType.includes("runTime"), w = metricType.includes("waitTime");
+    //console.log("Test1:", p, r, w);
+    if (submetric == "sum")
+        return (r ? p.runTime_sum : 0) + (w ? p.waitTime_sum : 0);
+    if (submetric == "1st")
+        return (r ? p.runTime_first : 0) + (w ? p.waitTime_first : 0);
+    if (submetric == "min")
+        return (r ? p.runTime_min : 0) + (w ? p.waitTime_min : 0);
+    if (submetric == "max")
+        return (r ? p.runTime_max : 0) + (w ? p.waitTime_max : 0);
+    if (submetric == "avg")
+        return ((r ? p.runTime_sum : 0) + (w ? p.waitTime_sum : 0)) / profilingInfo.calls;
+    throw new Error("Invalid metric/submetric.");
+}
 
 
 /***/ })

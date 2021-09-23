@@ -3,6 +3,11 @@ import React, {Component, useRef} from "react";
 import {EnsureClassProtoRenderFunctionIsWrapped} from "react-vextensions";
 import {observer} from "mobx-react";
 import {E} from "js-vextensions";
+import {configure} from "mobx";
+
+configure({
+	enforceActions: "never",
+});
 
 // variant of observer(...) wrapper-func, which returns a simple function result, instead of a ReactJS element-info entry (needed for ShowMessageBox.message)
 type IReactComponent = any; // temp

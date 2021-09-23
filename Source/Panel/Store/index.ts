@@ -1,28 +1,12 @@
 import {n, O} from "@Shared/General";
 import {makeObservable, observable} from "mobx";
-
-export class AccessorMeta {
-	name: string;
-	profilingInfo = new ProfilingInfo();
-	callPlanMetas: CallPlanMeta[];
-	callPlansStored: number;
-}
-export class CallPlanMeta {
-	index: number;
-	argsStr: string;
-	profilingInfo = new ProfilingInfo();
-}
-export class ProfilingInfo {
-	calls = 0;
-	calls_cached = 0;
-	totalRunTime = 0;
-	firstRunTime = 0;
-	minRunTime = 0;
-	maxRunTime = 0;
-}
+import {AccessorMeta, ProfilingSubmetric} from "./@AccessorMeta";
 
 export class RootState {
 	constructor() { makeObservable(this); }
+
+	@O profilingSubmetric = ProfilingSubmetric.max;
+	@O showDetailPanel = false; // temporarily false
 
 	@O accessorMetas = [] as AccessorMeta[];
 	@O selectedAccessorMeta_index: number;
